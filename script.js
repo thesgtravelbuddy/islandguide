@@ -239,6 +239,8 @@ async function loadTickers() {
 
 // Init on page load
 document.addEventListener('DOMContentLoaded', () => {
+  // Ensure correct initial layout if Home is the default active screen
+  document.body.classList.toggle('is-home', !!document.getElementById('screen-home')?.classList.contains('active'));
   loadTickers();
   initDishImages();
   initFontScaling();
@@ -348,6 +350,7 @@ async function loadLiveWeather() {
 // Load weather when ground tab is opened
 function showScreen(screenId) {
   // Do NOT collapse accordions — preserve open state so users can pick up where they left off
+  document.body.classList.toggle('is-home', screenId === 'home');
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const screen = document.getElementById('screen-' + screenId);
   if (screen) {
@@ -474,7 +477,7 @@ function populateGGrid() {
   grid.innerHTML = page.map(a => {
     const dest = encodeURIComponent(a.name + ' Singapore');
     const url = `https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=${dest}&travelmode=transit`;
-    return `<a href="${url}" target="_blank" style="background:linear-gradient(135deg,#ff006e,#ff6b35);color:white;text-decoration:none;padding:8px 6px;border-radius:10px;font-size:9.5px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;line-height:1.3;min-height:58px;justify-content:center;">
+    return `<a href="${url}" target="_blank" style="background:linear-gradient(135deg,var(--hot),var(--hot2));color:white;text-decoration:none;padding:8px 6px;border-radius:10px;font-size:9.5px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;line-height:1.3;min-height:58px;justify-content:center;">
       <span style="font-size:14px;">🚇</span>
       <span>${escapeHtml(a.name)}</span>
     </a>`;
@@ -502,7 +505,7 @@ function populateGCarousel() {
     return `
     <div class="g-nav-card">
       <b>${escapeHtml(a.name)}</b>
-      <a href="${url}" target="_blank" style="background:linear-gradient(90deg,#ff006e,#ff6b35);color:white;text-decoration:none;padding:10px;border-radius:10px;font-size:10px;font-weight:700;display:block;text-transform:uppercase;letter-spacing:0.5px;">🚇 GET ROUTE</a>
+      <a href="${url}" target="_blank" style="background:linear-gradient(90deg,var(--hot),var(--hot2));color:white;text-decoration:none;padding:10px;border-radius:10px;font-size:10px;font-weight:700;display:block;text-transform:uppercase;letter-spacing:0.5px;">🚇 GET ROUTE</a>
     </div>`;
   }).join('');
 }

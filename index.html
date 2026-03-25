@@ -48,7 +48,7 @@
         <img src="logo.png" alt="The SG Travel Buddy" onerror="this.outerHTML='🦁'">
       </div>
       <div class="header-title-wrap">
-        <div class="header-title">Island Guide by The&nbsp;<span class="ht-sg">SG</span>&nbsp;Travel Buddy</div>
+        <div class="header-title">Island Guide <span class="header-title-sub">by The&nbsp;<span class="ht-sg">SG</span>&nbsp;Travel Buddy</span></div>
         <div class="header-sub">Travel plans<span class="hs-dot">•</span>Discounted attraction tickets<span class="hs-dot">•</span>Tips</div>
       </div>
     </div>
@@ -60,7 +60,7 @@
   </div>
 </header>
 
-<div style="background:var(--cream);padding:0 16px 4px;position:sticky;top:62px;z-index:95;">
+<div class="search-bar-wrap" style="padding-left:16px;padding-right:16px;">
   <div class="search-bar" id="globalSearchBar">
     <span class="sb-icon">🔍</span>
     <input type="text" id="globalSearchInput" placeholder="Search anything — food, MRT, laws, tips…" oninput="handleSearch(this.value)" autocomplete="off">
@@ -73,107 +73,223 @@
 </div>
 
 <div class="screen active" id="screen-home">
-  <div class="hero-banner">
-    <div class="hero-tag">Start Here</div>
-    <div class="hero-title">Your pocket guide to Singapore 🌟</div>
-    <div class="hero-desc">Everything a first-timer needs — before you fly, the moment you land, and every day in between. Let's make your trip unforgettable!</div>
+
+  <!-- ── COVER CARD ── -->
+  <div class="cover-card">
+    <div class="cover-orchid-bg" aria-hidden="true">
+      <div class="cover-orb cover-orb-1"></div>
+      <div class="cover-orb cover-orb-2"></div>
+      <div class="cover-orb cover-orb-3"></div>
+      <div class="cover-petals" aria-hidden="true">
+        <span class="petal p1">✿</span>
+        <span class="petal p2">✾</span>
+        <span class="petal p3">✿</span>
+        <span class="petal p4">❀</span>
+        <span class="petal p5">✿</span>
+      </div>
+    </div>
+
+    <div class="cover-logo-wrap">
+      <div class="cover-logo-ring">
+        <img src="logo.png" alt="The SG Travel Buddy" onerror="this.outerHTML='🦁'">
+      </div>
+    </div>
+
+    <div class="cover-label">YOUR PERSONAL GUIDE TO</div>
+    <div class="cover-title">Singapore</div>
+    <div class="cover-divider-line"><span>✦</span></div>
+    <div class="cover-tagline">Curated for travelers who like the details.</div>
+
+    <div class="cover-edition-row">
+      <span class="cover-chip">🌺 Garden City Edition</span>
+      <span class="cover-chip">🇸🇬 SE Asia</span>
+    </div>
+
+    <button class="cover-cta" onclick="showScreen('planning'); switchTab('planning')">
+      Begin Your Journey ›
+    </button>
   </div>
 
-  <div class="section-title">📖 Navigate Your Trip</div>
-  <div class="home-nav-grid">
-    <div class="home-nav-item featured" onclick="showScreen('planning'); switchTab('planning')">
-      <div class="hni-icon">✈️</div>
-      <div class="hni-title">Trip Planning</div>
-      <div class="hni-sub">Before you go + Day 1</div>
+  <!-- ── LETTER FROM YOUR BUDDY ── -->
+  <div class="buddy-letter">
+    <div class="buddy-letter-header">
+      <div class="buddy-letter-from">A note from your travel buddy 🫰</div>
     </div>
-    <div class="home-nav-item" onclick="showScreen('ground'); switchTab('ground')">
-      <div class="hni-icon">🗺️</div>
-      <div class="hni-title">My Toolbox</div>
-      <div class="hni-sub">Weather, maps, apps & more</div>
-    </div>
-    <div class="home-nav-item" onclick="showScreen('places'); switchTab('places')">
-      <div class="hni-icon">🏙️</div>
-      <div class="hni-title">Places</div>
-      <div class="hni-sub">Top spots & neighbourhoods</div>
-    </div>
-    <div class="home-nav-item" onclick="showScreen('food'); switchTab('food')">
-      <div class="hni-icon">🍜</div>
-      <div class="hni-title">Local Food</div>
-      <div class="hni-sub">What to eat & how to order</div>
-    </div>
-    <div class="home-nav-item" onclick="showScreen('culture'); switchTab('culture')">
-      <div class="hni-icon">🤝</div>
-      <div class="hni-title">Culture & Locals</div>
-      <div class="hni-sub">Avoid conflict, blend in</div>
-    </div>
-    <div class="home-nav-item" onclick="showScreen('sos'); switchTab('sos')">
-      <div class="hni-icon">🆘</div>
-      <div class="hni-title">Emergency</div>
-      <div class="hni-sub">Numbers, hospitals, help</div>
-    </div>
+    <p>We're so glad you're coming to Singapore. There is genuinely no city quite like it — a place where colonial shophouses stand beside glass towers, where a Michelin-starred hawker stall costs less than a coffee back home, and where the garden truly runs through the city.</p>
+    <p>This guide was built to travel with you — from the moment you start planning, to your first hawker meal, to finding your way home after a late night. Use it at any stage of your trip.</p>
+    <p>Read it at your own pace, and whenever you want a local perspective, you know where to find us.</p>
+    <div class="buddy-letter-sig">— The SG Travel Buddy</div>
   </div>
 
-  <div class="section-title">⚡ Quick Facts</div>
-  <div class="card-grid">
-    <div class="mini-card">
-      <div class="mc-icon">💰</div>
-      <div class="mc-title">Currency</div>
-      <div class="mc-desc">Singapore Dollar (SGD, S$) we don't use USD</div>
+  <!-- ── AT A GLANCE ── -->
+  <div class="cover-section-label">At a Glance</div>
+
+  <div class="glance-grid">
+    <div class="glance-chip">
+      <span class="gc-icon">💰</span>
+      <div>
+        <div class="gc-title">Currency</div>
+        <div class="gc-desc">SGD · S$ · Not USD</div>
+      </div>
     </div>
-    <div class="mini-card">
-      <div class="mc-icon">🌡️</div>
-      <div class="mc-title">Climate</div>
-      <div class="mc-desc">Hot &amp; humid, 25–34°C (77–93°F) year-round</div>
+    <div class="glance-chip">
+      <span class="gc-icon">💳</span>
+      <div>
+        <div class="gc-title">Payments</div>
+        <div class="gc-desc">Tap-to-pay everywhere · Cards/Wise</div>
+      </div>
     </div>
-    <div class="mini-card">
-      <div class="mc-icon">🗣️</div>
-      <div class="mc-title">Language</div>
-      <div class="mc-desc">English (+ Singlish!) · Also: Mandarin, Malay &amp; Tamil</div>
+    <div class="glance-chip">
+      <span class="gc-icon">🌡️</span>
+      <div>
+        <div class="gc-title">Climate</div>
+        <div class="gc-desc">25–34°C year-round</div>
+      </div>
     </div>
-    <div class="mini-card clock-tile">
-      <div class="mc-icon">⏰</div>
-      <div class="mc-title">Time Zone (UTC+8)</div>
-      <div class="mc-time" id="sgLiveClock">--:--:--</div>
-      <div class="mc-date-small" id="sgLiveDate">Singapore</div>
+    <div class="glance-chip">
+      <span class="gc-icon">💧</span>
+      <div>
+        <div class="gc-title">Heat</div>
+        <div class="gc-desc">Hot + humid · water helps</div>
+      </div>
     </div>
-    <div class="mini-card flip-card" onclick="this.classList.toggle('flipped')" id="plugFlipCard">
-      <div class="flip-card-inner">
-        <div class="flip-front">
-          <div class="mc-icon">🔌</div>
-          <div class="mc-title">Plug Type G</div>
-          <div class="mc-desc">British 3-pin · 230V</div>
-          <div class="flip-hint">TAP TO SEE PLUG →</div>
+    <div class="glance-chip">
+      <span class="gc-icon">🗣️</span>
+      <div>
+        <div class="gc-title">Language</div>
+        <div class="gc-desc">English + Singlish</div>
+      </div>
+    </div>
+    <div class="glance-chip">
+      <span class="gc-icon">🚌</span>
+      <div>
+        <div class="gc-title">Transport</div>
+        <div class="gc-desc">MRT + buses · tap in/out</div>
+      </div>
+    </div>
+    <div class="glance-chip clock-glance">
+      <span class="gc-icon">⏰</span>
+      <div>
+        <div class="gc-title">Time (UTC+8)</div>
+        <div class="gc-desc gc-clock" id="sgLiveClock">--:--</div>
+        <div class="gc-date" id="sgLiveDate"></div>
+      </div>
+    </div>
+    <div class="glance-chip flip-card" onclick="this.classList.toggle('flipped')" id="plugFlipCard">
+      <div class="flip-card-inner" style="width:100%;">
+        <div class="flip-front" style="display:flex;align-items:center;gap:10px;width:100%;">
+          <span class="gc-icon">🔌</span>
+          <div>
+            <div class="gc-title">Plug Type G</div>
+            <div class="gc-desc">British 3-pin · 230V</div>
+            <div class="gc-tap-hint">Tap to see →</div>
+          </div>
         </div>
-        <div class="flip-back">
-          <a href="https://gude-systems.com/app/uploads/2024/05/steckertyp-g-uk-plug-commonwealth-stecker-gude-systems-1.png" target="_blank" onclick="event.stopPropagation();" style="display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;height:100%;justify-content:center;text-decoration:none;">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/UK_BS_1363_plug_and_socket_%28IEC_Type_G%29.png/400px-UK_BS_1363_plug_and_socket_%28IEC_Type_G%29.png"
-              alt="Type G BS 1363 UK plug and socket"
-              style="width:100%;max-height:108px;border-radius:6px;object-fit:cover;display:block;"
-              loading="eager"
-              onerror="this.outerHTML='<div style=\'font-size:38px;\'>🔌</div>'">
-            <div class="flip-label" style="color:rgba(255,255,255,0.82);">Type G · 230V · 50Hz · Same as UK &amp; Ireland<br><span style="font-size:8.5px;opacity:0.6;">📸 Tap image to open full size</span></div>
+        <div class="flip-back" style="display:flex;align-items:center;gap:10px;width:100%;padding:8px 0;">
+          <a href="https://gude-systems.com/app/uploads/2024/05/steckertyp-g-uk-plug-commonwealth-stecker-gude-systems-1.png" target="_blank" onclick="event.stopPropagation();" style="display:flex;align-items:center;gap:10px;width:100%;text-decoration:none;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/UK_BS_1363_plug_and_socket_%28IEC_Type_G%29.png/400px-UK_BS_1363_plug_and_socket_%28IEC_Type_G%29.png"
+              alt="Type G plug" style="width:48px;height:48px;border-radius:8px;object-fit:cover;flex-shrink:0;"
+              onerror="this.outerHTML='<span style=\'font-size:28px;\'>🔌</span>'">
+            <div>
+              <div class="gc-title" style="color:white;">Type G · 230V · 50Hz</div>
+              <div class="gc-desc" style="color:rgba(255,255,255,0.75);">Same as UK &amp; Ireland</div>
+              <div class="gc-tap-hint" style="color:rgba(255,255,255,0.55);">📸 Tap image for full size</div>
+            </div>
           </a>
         </div>
       </div>
     </div>
-    <div class="mini-card">
-      <div class="mc-icon">🚰</div>
-      <div class="mc-title">Tap Water</div>
-      <div class="mc-desc">100% safe to drink</div>
+    <div class="glance-chip">
+      <span class="gc-icon">🚰</span>
+      <div>
+        <div class="gc-title">Tap Water</div>
+        <div class="gc-desc">100% safe to drink</div>
+      </div>
+    </div>
+    <div class="glance-chip">
+      <span class="gc-icon">⛈️</span>
+      <div>
+        <div class="gc-title">Rain</div>
+        <div class="gc-desc">Sudden showers · pack a mini umbrella</div>
+      </div>
+    </div>
+    <div class="glance-chip">
+      <span class="gc-icon">🚭</span>
+      <div>
+        <div class="gc-title">Vaping</div>
+        <div class="gc-desc">Illegal · fines apply</div>
+      </div>
+    </div>
+    <div class="glance-chip">
+      <span class="gc-icon">🍽️</span>
+      <div>
+        <div class="gc-title">Tipping</div>
+        <div class="gc-desc">Not expected · service charge common</div>
+      </div>
+    </div>
+    <div class="glance-chip">
+      <span class="gc-icon">📞</span>
+      <div>
+        <div class="gc-title">Emergencies</div>
+        <div class="gc-desc">995 (ambulance/fire) · 999 (police)</div>
+      </div>
     </div>
   </div>
 
-  <div class="tip-box">
-    <span class="tip-label">💡 Did You Know?</span>
-    Singapore taps its water from <strong>local reservoirs, imported water, NEWater (reclaimed), and desalinated water</strong>. Tap water exceeds WHO standards — no need to buy bottles! 🚰
+  <!-- ── WHAT'S INSIDE ── -->
+  <div class="cover-section-label">What's Inside</div>
+
+  <div class="inside-list">
+    <div class="inside-item" onclick="showScreen('planning'); switchTab('planning')">
+      <div class="ii-icon-wrap" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);">✈️</div>
+      <div class="ii-text">
+        <div class="ii-title">Trip Planning</div>
+        <div class="ii-sub">Arrival cards, SIMs, currency, airport & Day 1</div>
+      </div>
+      <div class="ii-arrow">›</div>
+    </div>
+    <div class="inside-item" onclick="showScreen('ground'); switchTab('ground')">
+      <div class="ii-icon-wrap" style="background:linear-gradient(135deg,#e0f2fe,#bae6fd);">🗺️</div>
+      <div class="ii-text">
+        <div class="ii-title">My Toolbox</div>
+        <div class="ii-sub">Weather, MRT, maps, apps &amp; transport</div>
+      </div>
+      <div class="ii-arrow">›</div>
+    </div>
+    <div class="inside-item" onclick="showScreen('places'); switchTab('places')">
+      <div class="ii-icon-wrap" style="background:linear-gradient(135deg,#fef9c3,#fef08a);">🏙️</div>
+      <div class="ii-text">
+        <div class="ii-title">Places</div>
+        <div class="ii-sub">Landmarks, islands, districts &amp; hidden gems</div>
+      </div>
+      <div class="ii-arrow">›</div>
+    </div>
+    <div class="inside-item" onclick="showScreen('food'); switchTab('food')">
+      <div class="ii-icon-wrap" style="background:linear-gradient(135deg,#ffedd5,#fed7aa);">🍜</div>
+      <div class="ii-text">
+        <div class="ii-title">Local Food</div>
+        <div class="ii-sub">Hawker culture, must-eat dishes &amp; Michelin picks</div>
+      </div>
+      <div class="ii-arrow">›</div>
+    </div>
+    <div class="inside-item" onclick="showScreen('culture'); switchTab('culture')">
+      <div class="ii-icon-wrap" style="background:linear-gradient(135deg,#dcfce7,#bbf7d0);">🤝</div>
+      <div class="ii-text">
+        <div class="ii-title">Culture &amp; Locals</div>
+        <div class="ii-sub">Laws, customs, Singlish &amp; blending in</div>
+      </div>
+      <div class="ii-arrow">›</div>
+    </div>
+    <div class="inside-item" onclick="showScreen('sos'); switchTab('sos')">
+      <div class="ii-icon-wrap" style="background:linear-gradient(135deg,#fee2e2,#fecaca);">🆘</div>
+      <div class="ii-text">
+        <div class="ii-title">Emergency &amp; Safety</div>
+        <div class="ii-sub">Hospitals, numbers &amp; what to do if things go wrong</div>
+      </div>
+      <div class="ii-arrow">›</div>
+    </div>
   </div>
 
-  <div class="section-title">🌟 The SG Travel Buddy says…</div>
-  <div class="highlight-card">
-    <div class="hc-title">🏆 Welcome :)</div>
-    <div class="hc-body">We're so glad that you've decided to visit us in Singapore. It truly is a city/country unlike any other place in the world. Though its situated in South East Asia, we are different to that of surrounding neighbours. This guide has been put together to enhance your travel experience by giving you a single place where you have the tools to plan, manage on the ground, and explain the quirks which you may observe along the way. So do read what's in this guide - it was made specially for you. 🫰</div>
-  </div>
 </div>
 
 <div class="screen" id="screen-planning">
@@ -194,6 +310,11 @@
   <div class="acc-controls">
     <button class="acc-ctrl-btn expand" onclick="expandAll('screen-planning')">➕ Expand All</button>
     <button class="acc-ctrl-btn collapse" onclick="collapseAll('screen-planning')">➖ Collapse All</button>
+  </div>
+
+  <div class="tip-box">
+    <span class="tip-label">💡 Did You Know?</span>
+    Singapore taps its water from <strong>local reservoirs, imported water, NEWater (reclaimed), and desalinated water</strong>. Tap water exceeds WHO standards — no need to buy bottles! 🚰
   </div>
 
   <div class="accordion">
@@ -396,7 +517,6 @@
         <li>Jewel is <strong>open to everyone</strong>, no boarding pass needed. Its a public shopping mall not linked to airside transit. So if you want to visit while you've got a few hours spare, you will need to exit immigration and come out - be sure to keep your new boarding pass with you.</li>
         <li><strong>Free light show</strong> at the Rain Vortex nightly at 8pm & 9pm</li>
         <li>Some restaurants line the inner circle facing the waterfall — which creates a nice ambience but note conversation can be tough with the noise.</li>
-        <li>Most shops open after 10am</li>
       </ul>
       <div class="tip-box">
         <span class="tip-label">📸 Photo Tip</span>
@@ -408,7 +528,7 @@
       <h3 class="content-h3">✈️ Airside Attractions (for Transit Passengers)</h3>
       <p class="content-p">If you have a layover, don't just sit at the gate. Changi's transit areas have genuinely amazing free attractions:</p>
       <ul class="content-list">
-        <li><strong>🦋 Butterfly Garden (T3)</strong> — 1,000+ butterflies across ~40 species flying freely. Visit 10am–4pm when most active. It's humid — intentionally so!</li>
+        <li><strong>🦋 Butterfly Garden (T3)</strong> — 1,000+ butterflies across ~40 species flying freely. It's humid — intentionally so!</li>
         <li><strong>🌻 Sunflower Garden (T2 Rooftop)</strong> — A rare outdoor airside space. Fresh air, runway views, and real Singapore sunflowers. Can be hot at midday.</li>
         <li><strong>🌵 Cactus Garden (T1 Rooftop)</strong> — 100+ desert plant species in tropical Singapore. Unique contrast, quieter crowd, and a bar nearby!</li>
         <li><strong>🐟 Orchid Garden & Koi Pond (T2)</strong> — 30+ orchid species by theme. Serene and beautiful. Speak softly here, people treat it as a rest space.</li>
@@ -434,7 +554,7 @@
       </div>
       <div class="success-box">
         <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;color:#065f46;display:block;margin-bottom:4px;">✈️ Departing? Skip the Storage Queue!</span>
-        <strong>If you have an early morning flight or a flight later in the day, consider using Changi's Early Check-In (ECI) service instead of paying for luggage storage.</strong> Check in your bags at the <strong>Jewel Early Check-In Lounge (Level 1, Jewel)</strong>, which is open daily from 8am to 11:59pm, and then explore the airport and Jewel completely hands-free — no storage fees needed! Over 20 airlines participate including Singapore Airlines, Emirates, Qantas, KLM, and more. Check with your airline if they offer this — it's free and it means you can head straight to your gate after enjoying Jewel's facilities. <a href="https://www.changiairport.com/en/fly/departure-guide/early-check-in-services.html" target="_blank" rel="noopener noreferrer" style="color:#065f46;text-decoration:underline;font-weight:700;">Details &amp; airlines →</a>
+        <strong>If you have an early morning flight or a flight later in the day, consider using Changi's Early Check-In (ECI) service instead of paying for luggage storage.</strong> Check in your bags at the <strong>Jewel Early Check-In Lounge (Level 1, Jewel)</strong>, and then explore the airport and Jewel completely hands-free — no storage fees needed! Over 20 airlines participate including Singapore Airlines, Emirates, Qantas, KLM, and more. Check with your airline if they offer this — it's free and it means you can head straight to your gate after enjoying Jewel's facilities. <a href="https://www.changiairport.com/en/fly/departure-guide/early-check-in-services.html" target="_blank" rel="noopener noreferrer" style="color:#065f46;text-decoration:underline;font-weight:700;">Details &amp; airlines →</a>
       </div>
 
     </div>
@@ -884,13 +1004,16 @@
       <span class="acc-arrow">▼</span>
     </button>
     <div class="acc-body">
-      <p class="content-p">The three-tower hotel topped by a ship-shaped Sky Park has become one of the most recognisable buildings on the planet since opening in 2010. Inside: luxury mall, theatres, casino, and the famous <strong>rooftop infinity pool</strong> (hotel guests only).</p>
-      <p class="content-p"><strong>For visitors:</strong> The SkyPark Observation Deck (57th floor) gives panoramic 360° views of the Singapore skyline. Go at sunset or after dark when the city lights up — locals say night views are even better.</p>
-      <ul class="content-list">
-        <li>Observation deck tickets ~S$32 adults — book online to skip queues</li>
-        <li>The Casino is open 24/7 (foreigners enter free; Singapore residents pay entry levy)</li>
-        <li>The Shoppes at MBS has luxury brands and a canal with gondolas inside the mall!</li>
-        <li>Laser light show "Spectra" is free at 8pm & 9pm nightly at the Event Plaza</li>
+      <p class="content-p"><strong>For visitors:</strong> The SkyPark Observation Deck (57th floor) gives panoramic near 360° views of the Singapore skyline. Go at sunset or after dark when the city lights up. Dusk to sunset is typically between 6:30pm and 7:20pm — going as close to that time as you can is well worth it.</p>
+      <div class="tip-box">
+        <span class="tip-label">💡 Our Pick — LAVO</span>
+        LAVO is in our opinion a far better choice than the SkyPark Observation Deck. They're on opposite sides of the rooftop, but LAVO only requires a free online booking. Their only requirement is a minimum spend of S$30 — in return you get a seat, food, drinks, and a relaxed sunset view. If plans change, just call to do a courtesy cancellation. <a href="https://www.marinabaysands.com/restaurants/lavo.html" target="_blank" style="color:var(--blue);font-weight:600;">Book LAVO here →</a>
+      </div>
+      <p class="content-p">By contrast, the SkyPark Observation Deck is a fixed date and time booking (costs slightly more than LAVO), has no refunds if there's a storm, and comes with no seat, no drink, no food. To us it's a no brainer — but if you still want to go to SkyPark, <strong>we have the tickets for that</strong>.</p>
+      <ul class="content-list bullets">
+        <li>The Casino is open 24/7 (foreigners enter free; Singapore residents pay an entry levy)</li>
+        <li>The Shoppes at MBS has luxury brands and a canal with gondolas inside the mall! (We think there are nicer rides than the gondolas.)</li>
+        <li><strong>Spectra</strong> — free laser and water show at 8pm &amp; 9pm nightly, with an additional 10pm show on Fridays and Saturdays. Located between the LV store and Apple store at the bay. <a href="https://www.marinabaysands.com/attractions/spectra.html" target="_blank" style="color:var(--blue);font-weight:600;">Check official schedule →</a></li>
       </ul>
       <p class="content-p">📍 MRT: <strong>Bayfront (CC/DT)</strong></p>
     </div>
@@ -906,18 +1029,19 @@
       <span class="acc-arrow">▼</span>
     </button>
     <div class="acc-body">
-      <p class="content-p">A futuristic nature park built on reclaimed land, famous for its <strong>Supertrees</strong> — towering vertical garden structures that collect solar energy and rainwater. This is Singapore's vision of a "City in a Garden."</p>
+      <p class="content-p">One of the must-see places in Singapore — always changing with the seasons and keeping things fresh (pun intended). Gardens by the Bay (GBTB) is an area with multiple famous attractions; many people use the names interchangeably, but they're actually different things. Let us clarify.</p>
       <ul class="content-list stars">
-        <li><strong>Garden Rhapsody light show</strong> — Free, nightly at 7:45pm & 8:45pm at Supertree Grove. Absolutely magical.</li>
-        <li><strong>Cloud Forest</strong> — A 35m indoor mountain draped in mist and thousands of tropical plants. One of the most jaw-dropping rooms you'll ever walk into.</li>
-        <li><strong>Flower Dome</strong> — The world's largest glass greenhouse. Different themed floral displays change throughout the year.</li>
-        <li><strong>OCBC Skyway</strong> — A 128m aerial walkway connecting Supertrees. Spectacular views at sunset.</li>
+        <li><strong>Flower Dome &amp; Cloud Forest</strong> — The most famous pair of domes. Current themes: <strong>Sakura</strong> and <strong>Jurassic World</strong>. Our tickets come as a pair — you can buy individually from the onsite counter but the price of one dome is nearly the same as our pair ticket.</li>
+        <li><strong>Supertree Grove</strong> — A separate area within GBTB containing three distinct attractions:
+          <ul class="content-list arrows" style="margin-top:6px;">
+            <li><strong>Supertree Observatory</strong> — The tallest supertree, standing 16 storeys above ground with a 360° view across GBTB.</li>
+            <li><strong>OCBC Skyway</strong> — The 128m yellow bridge linking several supertrees together.</li>
+            <li><strong>Garden Rhapsody</strong> — Free nightly light show at 7:45pm and 8:45pm.</li>
+          </ul>
+        </li>
+        <li><strong>Floral Fantasy</strong> — Near Bayfront MRT Exit B. A smaller exhibition area. Current theme: <strong>My Little Pony</strong>.</li>
       </ul>
-      <div class="tip-box">
-        <span class="tip-label">💡 Budget Tip</span>
-        The outdoor Supertree Grove and Garden Rhapsody light show are <strong>free</strong>. Only the Flower Dome, Cloud Forest, and Skyway require paid tickets (~S$53 combo). Plan arrivals from 5pm onwards — the heat drops and the light show atmosphere builds beautifully.
-      </div>
-      <p class="content-p">📍 MRT: <strong>Bayfront</strong> | Free outdoor areas open 5am–2am</p>
+      <p class="content-p">📍 MRT: <strong>Bayfront</strong> | Free outdoor areas</p>
     </div>
   </div>
 
@@ -935,7 +1059,7 @@
       <p class="content-p">The Merlion constantly spouts water into Marina Bay — and with <strong>Marina Bay Sands framed perfectly in the background</strong>, it's the definitive Singapore photo. Visit at night when both the statue and MBS are illuminated.</p>
       <div class="tip-box">
         <span class="tip-label">📸 Photo Tip</span>
-        The crowd peaks midday. Visit after 7pm — fewer people, cooler air, and the dramatic nighttime backdrop makes all the difference. For the classic angle facing the MBS, stand near the Jubilee Bridge.
+        The crowd peaks midday. Visit after 7pm — fewer people, cooler air, and the dramatic nighttime backdrop makes all the difference. For the classic angle facing the MBS, stand near the Jubilee Bridge. Oh, and don't forget to bring your props (umbrella, shampoo) for the iconic Merlion photo 😂
       </div>
       <p class="content-p">📍 MRT: <strong>Raffles Place</strong> (5 min walk) | <strong>Free entry</strong></p>
     </div>
@@ -957,7 +1081,11 @@
         <li>Best time: sunset (around 6:30–7:30pm) for golden light and city transition to night</li>
         <li>Dining flights available — cocktail or Singapore Sling experience inside a capsule</li>
       </ul>
-      <p class="content-p">📍 MRT: <strong>Promenade (CC)</strong> | Tickets from ~S$40 adults</p>
+      <div class="tip-box">
+        <span class="tip-label">🍜 Don't Miss — J.I.A.K 99</span>
+        Downstairs at the Flyer is <strong>J.I.A.K 99</strong> — in our opinion a brilliant introduction to Singapore's food culture and history. A guided 45–60 min experience takes you through local food heritage across the four cultural communities — Chinese, Malay, Indian, and Eurasian — with food samplers and interactive storytelling. If you're not sure what local food is, feel a little apprehensive about trying something new, or simply want to understand the story behind what you're eating — this is the place to go, and go <em>early</em> in your trip. Let us know if you need tickets. 📍 #01-12, 30 Raffles Avenue, Singapore Flyer.
+      </div>
+      <p class="content-p">📍 MRT: <strong>Promenade (CC)</strong></p>
     </div>
   </div>
 
@@ -979,7 +1107,7 @@
         <li><strong>Buddha Tooth Relic Temple</strong> — Free entry, stunning interior, rooftop garden. Remove shoes before entering.</li>
         <li><strong>Sri Mariamman Temple</strong> — Singapore's oldest Hindu temple. Photography allowed in the courtyard.</li>
         <li><strong>Chinatown Heritage Centre</strong> — Learn the story of early Chinese migrants. Deeply moving exhibition.</li>
-        <li><strong>Chinatown Street Market</strong> — Pagoda & Trengganu Streets, great for souvenirs and novelties</li>
+        <li><strong>Chinatown Street Market</strong> — Pagoda &amp; Trengganu Streets, great for souvenirs and novelties. Best visited from the afternoon into the evening when it really comes alive.</li>
       </ul>
       <h3 class="content-h3">🍜 Food</h3>
       <ul class="content-list bullets">
@@ -1053,19 +1181,19 @@
       <p class="content-p">The biggest theme park in Southeast Asia, with rides based on Transformers, Jurassic World, Minions, and more. Zones include: Hollywood, New York, Sci-Fi City, Ancient Egypt, Lost World, and Far Far Away.</p>
       <div class="tip-box">
         <span class="tip-label">💡 Strategy</span>
-        Arrive at opening time (10am) — queues triple by midday due to the heat. Buy tickets online in advance. Bring ponchos — some rides get very wet!
+        <strong>Before you leave the hotel</strong>, download the Universal Studios Singapore app — it shows which rides are temporarily closed and has a live queue time tracker, essential for strategising your day. Aim to arrive by <strong>9:45am or earlier</strong> — there's usually already a queue and some people treat it like a Boxing Day sale 😄. If the weather looks bad on the day, go anyway — start with the indoor shows (Battlestar Galactica, Puss in Boots, Shrek 4D, etc.) as Singapore's tropical rain clears quickly and you don't want to be in your hotel room when it does. If you missed out on an Express Pass, you can buy one from a kiosk or retail store inside the park, subject to availability.
       </div>
       <h3 class="content-h3">🏖️ Other Sentosa Highlights</h3>
       <ul class="content-list bullets">
-        <li><strong>S.E.A. Aquarium (Marine Life Park)</strong> — One of the world's largest aquariums</li>
-        <li><strong>Adventure Cove Waterpark</strong> — Great for families</li>
-        <li><strong>Skyline Luge</strong> — Downhill go-kart track with great views, popular with all ages</li>
-        <li><strong>Siloso, Palawan & Tanjong Beaches</strong> — Man-made but lovely for a swim and sunset</li>
-        <li><strong>iFly Singapore</strong> — Indoor skydiving if you're feeling brave!</li>
+        <li><strong>Singapore Oceanarium</strong> (formerly S.E.A. Aquarium) — Completely transformed and reopened in July 2025, now three times larger with 22 immersive zones. The star is the Open Ocean habitat with a 36m-wide viewing panel where manta rays, zebra sharks, and eagle rays glide past. One of our favourite attractions — you can easily sit at that viewing panel for 30 minutes just watching. Also features Ancient Waters with life-sized animatronics of prehistoric creatures, jellyfish halls, Singapore's coastal mangroves, and a Research &amp; Learning Centre.</li>
+        <li><strong>Adventure Cove Waterpark</strong> — 14 water slides and a snorkelling lagoon with over 20,000 fish. Great for families and thrill seekers.</li>
+        <li><strong>Skyline Luge</strong> — A gravity-powered go-kart-style ride down purpose-built tracks with sweeping views. Fun for all ages. Take a chairlift up, luge down — you can do multiple runs on the same ticket.</li>
+        <li><strong>Siloso, Palawan &amp; Tanjong Beaches</strong> — Man-made but lovely for a swim, sunset drinks, or a beach stroll. Palawan has a suspension bridge out to the southernmost point of continental Asia. Each beach has beach bars and food outlets.</li>
+        <li><strong>iFly Singapore</strong> — Indoor skydiving in a vertical wind tunnel. No experience needed — instructors guide you. One of the world's largest indoor skydiving facilities.</li>
       </ul>
       <h3 class="content-h3">🚡 Getting to Sentosa</h3>
       <ul class="content-list bullets">
-        <li><strong>Sentosa Express Monorail</strong> — From VivoCity (HarbourFront MRT). Free for admission-paying attractions guests.</li>
+        <li><strong>Sentosa Express Monorail</strong> — Free to use once you're inside Sentosa. The only charge (S$4) is if you board at VivoCity/HarbourFront to enter Sentosa via the monorail. Once on the island, hop on and off freely between Beach, Imbiah, and Waterfront stations.</li>
         <li><strong>Cable Car</strong> — Scenic route from Mount Faber or HarbourFront Tower</li>
         <li><strong>Boardwalk</strong> — Free walking bridge from VivoCity</li>
         <li>📍 MRT: <strong>HarbourFront</strong>, then Sentosa Express</li>
@@ -1087,14 +1215,14 @@
     <div class="acc-body">
       <p class="content-p">Mandai is home to four world-class wildlife parks in one area — plan a full day or two if wildlife is your thing. The parks are widely regarded as some of the best in the world.</p>
       <ul class="content-list stars">
-        <li><strong>Singapore Zoo</strong> — Open-concept enclosures designed to mimic natural habitats. Animals roam freely in spacious settings. Breakfast with Orang Utans is a bucket-list experience! Open 8:30am–6pm.</li>
-        <li><strong>Night Safari</strong> — The world's first nocturnal wildlife park. Tram rides and walking trails in natural-feeling darkness. Animals like tigers, fishing cats, and tapirs are active at night. Open 6:30pm–midnight (last admission 11pm).</li>
+        <li><strong>Singapore Zoo</strong> — Open-concept enclosures designed to mimic natural habitats. Animals roam freely in spacious settings. The iconic <strong>Breakfast in the Wild</strong> (advance booking essential) lets you dine on a buffet at Ah Meng Restaurant while wildlife ambassadors — including orangutans, African penguins, macaws, sealions, and reptiles — visit your table with their keepers.</li>
+        <li><strong>Night Safari</strong> — The world's first nocturnal wildlife park. Tram rides and walking trails in natural-feeling darkness. Animals like tigers, fishing cats, and tapirs are active at night.</li>
         <li><strong>Bird Paradise</strong> — World's largest bird park (replaced old Jurong Bird Park). Over 3,500 birds across 400 species. Spectacular walk-through aviaries.</li>
-        <li><strong>River Wonders</strong> — Asia's first river-themed wildlife park. Giant pandas, manatees, and river giants from the Amazon to Mekong.</li>
+        <li><strong>River Wonders</strong> — Asia's first river-themed wildlife park. Giant pandas, manatees, capybaras (the world's largest rodent — and surprisingly adorable), and river giants from the Amazon to the Mekong. The Amazon Flooded Forest walk-through is spectacular.</li>
       </ul>
       <div class="tip-box">
         <span class="tip-label">💡 Pro Tips</span>
-        Book all tickets online to skip queues. Night Safari is extremely popular — book weeks ahead in high season. The Mandai shuttle bus connects all four parks from Mandai MRT or Woodlands MRT.
+        Special experiences like <strong>Breakfast in the Wild</strong> require advance booking — about 4 weeks ahead is wise as slots are limited. Let us know if you need tickets. The <strong>Mandai Khatib Shuttle bus</strong> is the most convenient way to get there — take the MRT to <strong>Khatib MRT (Red/NS Line)</strong>, then board the shuttle which runs directly to all four parks.
       </div>
     </div>
   </div>
@@ -1111,8 +1239,8 @@
     <div class="acc-body">
       <p class="content-p">Singapore has more nature than most people expect for a city this size. The Central Catchment Area preserves genuine tropical rainforest right in the heart of the island.</p>
       <ul class="content-list stars">
-        <li><strong>MacRitchie Reservoir Park</strong> — Rainforest trails from 1–12km. The <strong>TreeTop Walk</strong> — a free-standing suspension bridge 25 metres above the forest floor — is one of Singapore's hidden gems. Allow 4–6 hours for the full loop.</li>
-        <li><strong>East Coast Park</strong> — Coastal cycling, BBQ pits, seafood restaurants, and swimming. A local weekend favourite. Rent bicycles from ~S$8/hour.</li>
+        <li><strong>MacRitchie Reservoir Park</strong> — Rainforest trails from 1–12km. The <strong>TreeTop Walk</strong> — a free-standing suspension bridge 25 metres above the forest floor — is one of Singapore's hidden gems. Allow 4–6 hours for the full loop. Note that there are opening hours for the TreeTop Walk, and the entrance gate closes exactly at the stated time — so don't cut it too fine if you're heading there. <a href="https://nparks.gov.sg/visit/parks/central-catchment-nature-reserve/activities/hiking-nature-walk" target="_blank" rel="noopener noreferrer" style="color:#1d4ed8;text-decoration:underline;font-weight:700;">Official site →</a></li>
+        <li><strong>East Coast Park</strong> — Coastal cycling, BBQ pits, seafood restaurants, and swimming. A local weekend favourite. Bicycle rental is available from several points along the route — and you can even cycle all the way from Changi Airport to Marina Bay along the park connector network.</li>
         <li><strong>Southern Ridges</strong> — 10km of trail connecting Harbourfront to Buona Vista through Telok Blangah Hill, Mount Faber and Kent Ridge. Includes the famous Henderson Waves bridge.</li>
         <li><strong>Pulau Ubin (Ubin Island)</strong> — Escape to Singapore's last kampung (village). Take a bumboat from Changi Point Ferry Terminal. Cycling, nature, and a glimpse of old Singapore.</li>
       </ul>
@@ -1120,27 +1248,6 @@
   </div>
 
   <div class="section-title">🏘️ Neighbourhood Explorer</div>
-
-  <div class="accordion">
-    <button class="acc-header" onclick="toggleAcc(this)">
-      <span class="acc-icon">🌊</span>
-      <div class="acc-text">
-        <div class="acc-name">Marina Bay</div>
-        <div class="acc-sub">Singapore's showstopping modern waterfront</div>
-      </div>
-      <span class="acc-arrow">▼</span>
-    </button>
-    <div class="acc-body">
-      <p class="content-p">The centrepiece of modern Singapore. Dramatic skyscrapers, the iconic MBS, Gardens by the Bay, and a waterfront promenade perfect for evening walks and photography. The light shows here are world-class.</p>
-      <ul class="content-list bullets">
-        <li><strong>See:</strong> MBS observation deck, Merlion Park, ArtScience Museum, Esplanade Theatre</li>
-        <li><strong>Eat:</strong> Lau Pa Sat (satay stalls at night!), CÉ LA VI, restaurants at MBS</li>
-        <li><strong>Walk:</strong> The full promenade from Merlion to Gardens is about 3km and spectacular at night</li>
-        <li>📍 MRT: <strong>Bayfront / Raffles Place / Promenade</strong></li>
-      </ul>
-    </div>
-  </div>
-
   <div class="accordion">
     <button class="acc-header" onclick="toggleAcc(this)">
       <span class="acc-icon">🎨</span>
@@ -1235,12 +1342,12 @@
     <div class="acc-body">
       <p class="content-p">Singapore's skyline — the Supertrees, Marina Bay Sands, and CBD towers — is one of Asia's most photogenic. Visiting after sunset is magical.</p>
       <ul class="content-list stars">
-        <li><strong>SkyPark Observation Deck (MBS)</strong> — Most famous view. Book in advance, especially weekends. ~S$32.</li>
-        <li><strong>CÉ LA VI</strong> — Rooftop bar and club atop Marina Bay Sands. Smart casual dress code. Pricy but the view is unmatched.</li>
-        <li><strong>1-Altitude</strong> — Claimed highest alfresco rooftop bar in the world (63rd floor). View of Marina Bay from a different angle.</li>
-        <li><strong>Smoke & Mirrors</strong> — Rooftop bar on top of the National Gallery. Great view across Padang and Marina Bay.</li>
-        <li><strong>Atlas Bar</strong> — Not a rooftop but a stunning art deco bar in Parkview Square. Famous for its 16-metre gin tower.</li>
-        <li><strong>Gardens by the Bay Supertree Grove</strong> — Walk across the OCBC Skyway bridge between Supertrees for a unique elevated perspective. Tickets ~S$14.</li>
+        <li><strong>LAVO</strong> — Rooftop restaurant and bar on top of Marina Bay Sands (opposite side from SkyPark). Free online booking, minimum spend S$30. Our pick for sunset views with a seat and a drink. 📍 Marina Bay Sands Hotel Tower 1.</li>
+        <li><strong>CÉ LA VI</strong> — Rooftop club, lounge, and restaurant atop Marina Bay Sands. Smart casual dress code. Pricy but the view across Marina Bay is spectacular. 📍 Marina Bay Sands, Tower 3 SkyPark.</li>
+        <li><strong>LeVeL33</strong> — World's highest urban craft microbrewery, 33 floors above Marina Bay. Panoramic views of MBS, Gardens by the Bay, and the CBD. Beers brewed on-site. Book outdoor terrace seats in advance. 📍 8 Marina Boulevard #33-01, MBFC Tower 1.</li>
+        <li><strong>One Fullerton</strong> — A cluster of waterfront restaurants and bars right on the bay. Stunning ground-level views of MBS directly across the water — perfect for watching Spectra. Includes PS. Cafe, Brewerkz, Riviera, and more. 📍 1 Fullerton Road.</li>
+        <li><strong>Lantern</strong> — Rooftop infinity pool bar at The Fullerton Bay Hotel. Sophisticated waterfront setting overlooking Marina Bay. 📍 80 Collyer Quay, The Fullerton Bay Hotel.</li>
+        <li><strong>Atlas Bar</strong> — Not a rooftop, but a stunning art deco grand lobby bar in Parkview Square. Famous for its 16-metre gin tower with over 1,000 gins. 📍 600 North Bridge Road.</li>
       </ul>
     </div>
   </div>
@@ -1257,7 +1364,7 @@
     <div class="acc-body">
       <p class="content-p">The Singapore River is where the country's early trading history took place. Today it's one of the best ways to see the city at its most atmospheric — especially at night when the buildings are illuminated.</p>
       <ul class="content-list bullets">
-        <li><strong>Singapore River Cruise (Bumboat)</strong> — Traditional style boats pass Boat Quay, Clarke Quay, Roberstson Quay and the Esplanade. Great sunset or night experience. Departs from various quay points.</li>
+        <li><strong>Singapore River Cruise (Bumboat)</strong> — Traditional style boats pass Boat Quay, Clarke Quay, Roberstson Quay and the Esplanade. Great at sunset or after dark. Departs from various quay points. <em>Tip:</em> if you want to watch the Spectra laser show from the water (most people watch from bayside), tickets are sold at the jetty counter — not online. Alternatively, <strong>WaterB</strong> offers online booking for a similar tour, but their boarding point is at a different location — don't confuse the two. Check the official site for up-to-date schedules.</li>
         <li><strong>DUCKtours</strong> — An amphibious DUKW vehicle that tours the city and then plunges into Marina Bay! Great fun for families and groups.</li>
         <li><strong>Marina Bay Sands Gondola</strong> — Gondola rides in the MBS casino area shopping mall</li>
       </ul>
@@ -1630,9 +1737,8 @@
     <div class="msc-address">
       <span>📍</span>
       <div>
-        <strong>Address & Hours</strong>
+        <strong>Address</strong>
         Tai Hwa Eating House, 466 Crawford Lane #01-12, Singapore 190466<br>
-        Daily 9:30am – 9pm · Closed 1st & 3rd Monday of each month<br>
         Nearest MRT: Lavender (EW2) — 10 min walk
       </div>
     </div>
@@ -1650,7 +1756,7 @@
     <div class="bib-address">
       <span class="addr-pin">📍</span>
       <div>Maxwell Food Centre #01-10/11, 1 Kadayanallur St, Singapore 069184<br>
-      <span class="bib-hours">Tue–Sun 10am–8pm · Closed Monday · MRT: Tanjong Pagar (EW15)</span></div>
+      <span class="bib-hours">MRT: Tanjong Pagar (EW15)</span></div>
     </div>
   </div>
 
@@ -1662,7 +1768,7 @@
     <div class="bib-address">
       <span class="addr-pin">📍</span>
       <div>Hong Lim Market & Food Centre #02-17, 531A Upper Cross St, Singapore 051531<br>
-      <span class="bib-hours">Mon–Sat 6am–3pm · Closed Sun & Public Holidays · MRT: Chinatown (NE4/DT19)</span></div>
+      <span class="bib-hours">MRT: Chinatown (NE4/DT19)</span></div>
     </div>
   </div>
 
@@ -1674,7 +1780,7 @@
     <div class="bib-address">
       <span class="addr-pin">📍</span>
       <div>Hong Lim Market & Food Centre #02-16, 531A Upper Cross St, Singapore 051531 (flagship)<br>
-      <span class="bib-hours">Mon–Sat 7:30am–7:30pm · Sun 7:30am–3pm · MRT: Chinatown (NE4/DT19)</span></div>
+      <span class="bib-hours">MRT: Chinatown (NE4/DT19)</span></div>
     </div>
   </div>
 
@@ -1686,7 +1792,7 @@
     <div class="bib-address">
       <span class="addr-pin">📍</span>
       <div>11 New Bridge Road #01-01, Singapore 059383 (flagship)<br>
-      <span class="bib-hours">Daily 9am–9:30pm (varies by outlet) · MRT: Clarke Quay (NE5)</span></div>
+      <span class="bib-hours">MRT: Clarke Quay (NE5)</span></div>
     </div>
   </div>
 
@@ -1698,7 +1804,7 @@
     <div class="bib-address">
       <span class="addr-pin">📍</span>
       <div>Tiong Bahru Market #02-05, 30 Seng Poh Road, Singapore 168898<br>
-      <span class="bib-hours">Daily 6am–9pm · MRT: Tiong Bahru (EW17)</span></div>
+      <span class="bib-hours">MRT: Tiong Bahru (EW17)</span></div>
     </div>
   </div>
 
@@ -1710,7 +1816,7 @@
     <div class="bib-address">
       <span class="addr-pin">📍</span>
       <div>Jalan Berseh Food Centre #01-100, 166 Jalan Besar, Singapore 208877<br>
-      <span class="bib-hours">Mon–Fri 9:30am–sold out (~2pm) · Closed Sat–Sun · MRT: Lavender (EW11) or Jalan Besar (DT22)</span></div>
+      <span class="bib-hours">MRT: Lavender (EW11) or Jalan Besar (DT22)</span></div>
     </div>
   </div>
 
@@ -1722,7 +1828,7 @@
     <div class="bib-address">
       <span class="addr-pin">📍</span>
       <div>Old Airport Road Food Centre #01-32, 51 Old Airport Rd, Singapore 390051<br>
-      <span class="bib-hours">Tue–Sun ~10am–sold out · Closed Monday · MRT: Dakota (CC8)</span></div>
+      <span class="bib-hours">MRT: Dakota (CC8)</span></div>
     </div>
   </div>
 
@@ -1734,7 +1840,7 @@
     <div class="bib-address">
       <span class="addr-pin">📍</span>
       <div>Old Airport Road Food Centre #01-10, 51 Old Airport Rd, Singapore 390051<br>
-      <span class="bib-hours">Tue–Sun, morning to early afternoon · Closed Monday · MRT: Dakota (CC8)</span></div>
+      <span class="bib-hours">MRT: Dakota (CC8)</span></div>
     </div>
   </div>
 
@@ -1746,7 +1852,7 @@
     <div class="bib-address">
       <span class="addr-pin">📍</span>
       <div>439 Joo Chiat Road, Singapore 427652<br>
-      <span class="bib-hours">Mon–Sun 8am–9pm · MRT: Paya Lebar (EW8/CC9) or bus</span></div>
+      <span class="bib-hours">MRT: Paya Lebar (EW8/CC9) or bus</span></div>
     </div>
   </div>
 
@@ -1758,7 +1864,7 @@
     <div class="bib-address">
       <span class="addr-pin">📍</span>
       <div>323 Geylang Road (Lor 19), Singapore 389361<br>
-      <span class="bib-hours">Daily 5pm–2am · MRT: Aljunied (EW9) — 5 min walk</span></div>
+      <span class="bib-hours">MRT: Aljunied (EW9) — 5 min walk</span></div>
     </div>
   </div>
 
@@ -1770,7 +1876,7 @@
     <div class="bib-address">
       <span class="addr-pin">📍</span>
       <div>Lucky Plaza, 304 Orchard Road #B1-06, Singapore 238863<br>
-      <span class="bib-hours">Daily ~11am–sold out (typically 2–3pm) · MRT: Orchard (NS22/TE14)</span></div>
+      <span class="bib-hours">MRT: Orchard (NS22/TE14)</span></div>
     </div>
   </div>
 
@@ -1782,7 +1888,7 @@
     <div class="bib-address">
       <span class="addr-pin">📍</span>
       <div>East Coast Lagoon Food Village #01-14, 1220 East Coast Pkwy, Singapore 468960<br>
-      <span class="bib-hours">Tue–Sun 5pm–11pm · Closed Monday · MRT: Bedok (EW5) then taxi/bus</span></div>
+      <span class="bib-hours">MRT: Bedok (EW5) then taxi/bus</span></div>
     </div>
   </div>
 
@@ -1794,7 +1900,7 @@
     <div class="bib-address">
       <span class="addr-pin">📍</span>
       <div>Newton Food Centre #01-53, 500 Clemenceau Ave N, Singapore 229495<br>
-      <span class="bib-hours">Daily ~11am–9pm · MRT: Newton (NS21/DT11)</span></div>
+      <span class="bib-hours">MRT: Newton (NS21/DT11)</span></div>
     </div>
   </div>
 
@@ -1806,7 +1912,7 @@
     <div class="bib-address">
       <span class="addr-pin">📍</span>
       <div>401 Balestier Road, Singapore 329919<br>
-      <span class="bib-hours">Daily 10am–3pm, 5pm–9:30pm · Closed alternate Tuesdays · MRT: Boon Keng (NE9) — 10 min walk</span></div>
+      <span class="bib-hours">MRT: Boon Keng (NE9) — 10 min walk</span></div>
     </div>
   </div>
 
@@ -2052,7 +2158,7 @@
     <div class="law-number">#6</div>
     <div>
       <div class="law-title">Public Drinking Restrictions</div>
-      <div class="law-desc">Consuming alcohol in public is banned between 10:30pm and 7am. Additional restrictions apply in designated areas like Little India on weekends. This includes drinking outside the bar/restaurant on the street.</div>
+      <div class="law-desc">There are two separate rules here that are easy to mix up. <strong>Retail outlets</strong> (convenience stores, supermarkets, petrol stations) cannot sell takeaway alcohol after 10:30pm. However, <strong>licensed restaurants and bars</strong> can serve alcohol to seated patrons until midnight — so dining in at a restaurant past 10:30pm with a drink is perfectly fine. What is banned island-wide between 10:30pm and 7am is consuming alcohol in <em>public spaces</em> (parks, void decks, streets, sidewalks). <strong>Liquor Control Zones</strong> (Little India and Geylang) have stricter rules — no public drinking on weekends and public holidays from 10:30pm Friday through 7am Monday. Fines up to S$1,000.</div>
     </div>
   </div>
   <div class="law-card">
@@ -2238,7 +2344,7 @@
     <div>
       <div class="cc-label">Lost Passport</div>
       <div class="cc-num">Immigration &amp; Checkpoints Authority Hotline</div>
-      <div class="cc-name">(65) 6391 6100 · Immigration &amp; Checkpoints Authority Building, Kallang Rd · Open Mon–Fri 8am–5pm</div>
+      <div class="cc-name">(65) 6391 6100 · Immigration &amp; Checkpoints Authority Building, Kallang Rd</div>
     </div>
   </div>
   <div class="contact-card">
