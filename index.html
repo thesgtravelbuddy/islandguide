@@ -110,21 +110,33 @@
     </button>
   </div>
 
+  <!-- ── BUDDY + GLANCE: side by side on desktop ── -->
+  <div class="home-top-row">
+  <div class="home-top-left">
+
   <!-- ── LETTER FROM YOUR BUDDY ── -->
   <div class="buddy-letter">
-    <div class="buddy-letter-header">
-      <div class="buddy-letter-from">A note from your travel buddy 🫰</div>
-    </div>
+    <div class="cover-section-label" style="margin-top:0;">A note from your travel buddy 🫰</div>
     <p>We're so glad you're coming to Singapore. There is genuinely no city quite like it — a place where colonial shophouses stand beside glass towers, where a Michelin-starred hawker stall costs less than a coffee back home, and where the garden truly runs through the city.</p>
     <p>This guide was built to travel with you — from the moment you start planning, to your first hawker meal, to finding your way home after a late night. Use it at any stage of your trip.</p>
     <p>Read it at your own pace, and whenever you want a local perspective, you know where to find us.</p>
     <div class="buddy-letter-sig">— The SG Travel Buddy</div>
   </div>
 
+  </div><!-- /home-top-left -->
+  <div class="home-top-right">
+
   <!-- ── AT A GLANCE ── -->
   <div class="cover-section-label">At a Glance</div>
 
   <div class="glance-grid">
+    <div class="glance-chip">
+      <span class="gc-icon">📞</span>
+      <div>
+        <div class="gc-title">Emergencies</div>
+        <div class="gc-desc">995 (ambulance/fire) · 999 (police)</div>
+      </div>
+    </div>
     <div class="glance-chip">
       <span class="gc-icon">💰</span>
       <div>
@@ -140,17 +152,10 @@
       </div>
     </div>
     <div class="glance-chip">
-      <span class="gc-icon">🌡️</span>
+      <span class="gc-icon">🚌</span>
       <div>
-        <div class="gc-title">Climate</div>
-        <div class="gc-desc">25–34°C year-round</div>
-      </div>
-    </div>
-    <div class="glance-chip">
-      <span class="gc-icon">💧</span>
-      <div>
-        <div class="gc-title">Heat</div>
-        <div class="gc-desc">Hot + humid · water helps</div>
+        <div class="gc-title">Transport</div>
+        <div class="gc-desc">MRT + buses · tap in/out</div>
       </div>
     </div>
     <div class="glance-chip">
@@ -161,10 +166,10 @@
       </div>
     </div>
     <div class="glance-chip">
-      <span class="gc-icon">🚌</span>
+      <span class="gc-icon">🌡️</span>
       <div>
-        <div class="gc-title">Transport</div>
-        <div class="gc-desc">MRT + buses · tap in/out</div>
+        <div class="gc-title">Climate</div>
+        <div class="gc-desc">25–34°C year-round</div>
       </div>
     </div>
     <div class="glance-chip clock-glance">
@@ -173,6 +178,20 @@
         <div class="gc-title">Time (UTC+8)</div>
         <div class="gc-desc gc-clock" id="sgLiveClock">--:--</div>
         <div class="gc-date" id="sgLiveDate"></div>
+      </div>
+    </div>
+    <div class="glance-chip">
+      <span class="gc-icon">🚰</span>
+      <div>
+        <div class="gc-title">Tap Water</div>
+        <div class="gc-desc">100% safe to drink</div>
+      </div>
+    </div>
+    <div class="glance-chip">
+      <span class="gc-icon">⛈️</span>
+      <div>
+        <div class="gc-title">Rain</div>
+        <div class="gc-desc">Sudden showers · pack a mini umbrella</div>
       </div>
     </div>
     <div class="glance-chip flip-card" onclick="this.classList.toggle('flipped')" id="plugFlipCard">
@@ -200,20 +219,6 @@
       </div>
     </div>
     <div class="glance-chip">
-      <span class="gc-icon">🚰</span>
-      <div>
-        <div class="gc-title">Tap Water</div>
-        <div class="gc-desc">100% safe to drink</div>
-      </div>
-    </div>
-    <div class="glance-chip">
-      <span class="gc-icon">⛈️</span>
-      <div>
-        <div class="gc-title">Rain</div>
-        <div class="gc-desc">Sudden showers · pack a mini umbrella</div>
-      </div>
-    </div>
-    <div class="glance-chip">
       <span class="gc-icon">🚭</span>
       <div>
         <div class="gc-title">Vaping</div>
@@ -227,21 +232,17 @@
         <div class="gc-desc">Not expected · service charge common</div>
       </div>
     </div>
-    <div class="glance-chip">
-      <span class="gc-icon">📞</span>
-      <div>
-        <div class="gc-title">Emergencies</div>
-        <div class="gc-desc">995 (ambulance/fire) · 999 (police)</div>
-      </div>
-    </div>
   </div>
 
   <!-- ── WHAT'S INSIDE ── -->
+  </div><!-- /home-top-right -->
+  </div><!-- /home-top-row -->
+
   <div class="cover-section-label">What's Inside</div>
 
   <div class="inside-list">
     <div class="inside-item" onclick="showScreen('planning'); switchTab('planning')">
-      <div class="ii-icon-wrap" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);">✈️</div>
+      <div class="ii-icon-wrap" style="background:linear-gradient(135deg,#7b1645,#c4334e);">✈️</div>
       <div class="ii-text">
         <div class="ii-title">Trip Planning</div>
         <div class="ii-sub">Arrival cards, SIMs, currency, airport & Day 1</div>
@@ -249,7 +250,7 @@
       <div class="ii-arrow">›</div>
     </div>
     <div class="inside-item" onclick="showScreen('ground'); switchTab('ground')">
-      <div class="ii-icon-wrap" style="background:linear-gradient(135deg,#e0f2fe,#bae6fd);">🗺️</div>
+      <div class="ii-icon-wrap" style="background:linear-gradient(135deg,#1a5f72,#2a7f8f);">🗺️</div>
       <div class="ii-text">
         <div class="ii-title">My Toolbox</div>
         <div class="ii-sub">Weather, MRT, maps, apps &amp; transport</div>
@@ -257,7 +258,7 @@
       <div class="ii-arrow">›</div>
     </div>
     <div class="inside-item" onclick="showScreen('places'); switchTab('places')">
-      <div class="ii-icon-wrap" style="background:linear-gradient(135deg,#fef9c3,#fef08a);">🏙️</div>
+      <div class="ii-icon-wrap" style="background:linear-gradient(135deg,#8b5e1a,#b07820);">🏙️</div>
       <div class="ii-text">
         <div class="ii-title">Places</div>
         <div class="ii-sub">Landmarks, islands, districts &amp; hidden gems</div>
@@ -265,7 +266,7 @@
       <div class="ii-arrow">›</div>
     </div>
     <div class="inside-item" onclick="showScreen('food'); switchTab('food')">
-      <div class="ii-icon-wrap" style="background:linear-gradient(135deg,#ffedd5,#fed7aa);">🍜</div>
+      <div class="ii-icon-wrap" style="background:linear-gradient(135deg,#8b3a2a,#b8412a);">🍜</div>
       <div class="ii-text">
         <div class="ii-title">Local Food</div>
         <div class="ii-sub">Hawker culture, must-eat dishes &amp; Michelin picks</div>
@@ -273,7 +274,7 @@
       <div class="ii-arrow">›</div>
     </div>
     <div class="inside-item" onclick="showScreen('culture'); switchTab('culture')">
-      <div class="ii-icon-wrap" style="background:linear-gradient(135deg,#dcfce7,#bbf7d0);">🤝</div>
+      <div class="ii-icon-wrap" style="background:linear-gradient(135deg,#1c6e42,#228b52);">🤝</div>
       <div class="ii-text">
         <div class="ii-title">Culture &amp; Locals</div>
         <div class="ii-sub">Laws, customs, Singlish &amp; blending in</div>
@@ -281,7 +282,7 @@
       <div class="ii-arrow">›</div>
     </div>
     <div class="inside-item" onclick="showScreen('sos'); switchTab('sos')">
-      <div class="ii-icon-wrap" style="background:linear-gradient(135deg,#fee2e2,#fecaca);">🆘</div>
+      <div class="ii-icon-wrap" style="background:linear-gradient(135deg,#4a3060,#6b3fa0);">🆘</div>
       <div class="ii-text">
         <div class="ii-title">Emergency &amp; Safety</div>
         <div class="ii-sub">Hospitals, numbers &amp; what to do if things go wrong</div>
@@ -756,60 +757,84 @@
   </div>
 
 
-  <div class="section-title">🎟️ Attraction Tickets</div>
-  <div class="accordion" style="margin-bottom:14px;">
-    <div style="padding:12px;">
-      <div class="ticket-iframe-wrap">
-        <iframe src="https://form.jotform.com/242353781370456" height="500" title="Attraction Tickets Form"></iframe>
-      </div>
-    </div>
-  </div>
-
-
+  <!-- ── QUICK LINKS (full width, always on top) ── -->
   <div class="section-title">🚀 Quick Links</div>
-  <div class="accordion" style="margin-bottom:14px;">
-    <div style="padding:12px 12px 10px;">
-      <span class="ql-section-label" style="margin-top:0;">🚗 Transport</span>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:4px;">
-        <a href="intent://open?screenType=BOOKING#Intent;scheme=grab;package=com.grabtaxi.passenger;end" class="ql-btn ql-grab" style="padding:14px 4px;"><span class="ql-icon">🚗</span>Grab</a>
-        <a href="#" onclick="window.location='intent://#Intent;package=com.codigo.comfort;scheme=cdgzig;end'; setTimeout(function(){window.location='https://play.google.com/store/apps/details?id=com.codigo.comfort';},1200);" class="ql-btn ql-zig" style="padding:14px 4px;"><span class="ql-icon">🚕</span>Zig</a>
-        <a href="https://mrt.sg/map" target="_blank" class="ql-btn ql-mrt" style="padding:14px 4px;"><span class="ql-icon">🚇</span>MRT Map</a>
+  <div class="accordion" style="margin-bottom:18px;">
+    <div style="padding:14px 12px 12px;">
+
+      <p class="ql-group-label">Transport</p>
+      <div class="ql2-grid">
+        <a href="intent://open?screenType=BOOKING#Intent;scheme=grab;package=com.grabtaxi.passenger;end" class="ql2-btn ql2-grab"><span>🚗</span>Grab</a>
+        <a href="#" onclick="window.location='intent://#Intent;package=com.codigo.comfort;scheme=cdgzig;end'; setTimeout(function(){window.location='https://play.google.com/store/apps/details?id=com.codigo.comfort';},1200);" class="ql2-btn ql2-zig"><span>🚕</span>Zig</a>
+        <a href="https://mrt.sg/map" target="_blank" class="ql2-btn ql2-mrt"><span>🚇</span>MRT Map</a>
+        <a href="https://www.changiairport.com/en/flights/departures.html" target="_blank" class="ql2-btn ql2-changi"><span>🛫</span>Departures</a>
+        <a href="https://www.changiairport.com/en/flights/arrivals.html" target="_blank" class="ql2-btn ql2-changi"><span>🛬</span>Arrivals</a>
+        <a href="https://mbccs.com.sg/" target="_blank" class="ql2-btn ql2-cruise"><span>🚢</span>Cruise</a>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:4px;">
-        <a href="https://www.changiairport.com/en/flights/departures.html" target="_blank" class="ql-btn ql-changi" style="padding:14px 4px;"><span class="ql-icon">🛫</span>Departures</a>
-        <a href="https://www.changiairport.com/en/flights/arrivals.html" target="_blank" class="ql-btn ql-changi" style="padding:14px 4px;"><span class="ql-icon">🛬</span>Arrivals</a>
-        <a href="https://mbccs.com.sg/" target="_blank" class="ql-btn ql-cruise" style="padding:14px 4px;"><span class="ql-icon">🚢</span>Cruise</a>
-        <div style="visibility:hidden;" class="ql-btn"></div>
+
+      <p class="ql-group-label" style="margin-top:12px;">Daily Essentials</p>
+      <div class="ql2-grid">
+        <a href="https://www.google.com/maps/search/food+near+me" target="_blank" class="ql2-btn ql2-food"><span>🍜</span>Food</a>
+        <a href="https://www.google.com/maps/search/ATM" target="_blank" class="ql2-btn ql2-atm"><span>🏧</span>ATM</a>
+        <a href="https://www.google.com/maps/search/Money+Changer" target="_blank" class="ql2-btn ql2-money"><span>💱</span>FX</a>
+        <a href="https://www.google.com/maps/search/Convenience+Store" target="_blank" class="ql2-btn ql2-store"><span>🏪</span>Store</a>
+        <a href="https://www.google.com/maps/search/Pharmacy" target="_blank" class="ql2-btn ql2-pharm"><span>💊</span>Pharmacy</a>
+        <a href="https://www.changiairport.com/en/at-changi/map.html" target="_blank" class="ql2-btn ql2-changi"><span>🏢</span>Changi Map</a>
       </div>
-      <span class="ql-section-label">🏪 Daily Essentials</span>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:4px;">
-        <a href="https://www.google.com/maps/search/food+near+me" target="_blank" class="ql-btn ql-food" style="padding:14px 4px;"><span class="ql-icon">🍜</span>Food</a>
-        <a href="https://www.google.com/maps/search/ATM" target="_blank" class="ql-btn ql-atm" style="padding:14px 4px;"><span class="ql-icon">🏧</span>ATM</a>
-        <a href="https://www.google.com/maps/search/Money+Changer" target="_blank" class="ql-btn ql-money" style="padding:14px 4px;"><span class="ql-icon">💱</span>FX</a>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:14px;">
-        <a href="https://www.google.com/maps/search/Convenience+Store" target="_blank" class="ql-btn ql-store" style="padding:14px 4px;"><span class="ql-icon">🏪</span>Store</a>
-        <a href="https://www.google.com/maps/search/Pharmacy" target="_blank" class="ql-btn ql-pharm" style="padding:14px 4px;"><span class="ql-icon">💊</span>Pharmacy</a>
-        <a href="https://www.changiairport.com/en/at-changi/map.html" target="_blank" class="ql-btn ql-changi" style="padding:14px 4px;"><span class="ql-icon">🏢</span>Changi Map</a>
-        <div style="visibility:hidden;" class="ql-btn"></div>
-      </div>
-      <span class="ql-section-label">💱 Currency Converter (SGD)</span>
-      <div class="fx-row" style="margin-top:4px;">
-        <span class="fx-label">SGD Amount</span>
-        <input type="number" id="fxAmt" value="100" class="fx-input" oninput="fxConvert()">
-        <select id="fxCurr" class="fx-input" style="width:auto;cursor:pointer;" onchange="fxConvert()">
-          <option value="USD">USD</option>
-          <option value="AUD">AUD</option>
-          <option value="MYR">MYR</option>
-          <option value="EUR">EUR</option>
-          <option value="GBP">GBP</option>
-          <option value="CNY">CNY</option>
-        </select>
-        <div id="fxRes" class="fx-res">--</div>
-      </div>
-      <p class="fx-note">Live rates. 1 SGD to selected currency.</p>
+
     </div>
   </div>
+
+  <!-- ── TICKETS + CURRENCY (side by side on desktop) ── -->
+  <div class="tickets-fx-row">
+
+    <div class="tickets-col">
+      <div class="section-title">🎟️ Attraction Tickets</div>
+      <a href="https://form.jotform.com/242353781370456" target="_blank" class="ticket-card-link">
+        <div class="ticket-card">
+          <div class="ticket-card-bg" aria-hidden="true"></div>
+          <div class="ticket-card-inner">
+            <div class="ticket-card-icon">🎡</div>
+            <div class="ticket-card-text">
+              <div class="ticket-card-title">Book Attraction Tickets</div>
+              <div class="ticket-card-sub">Discounted tickets · Skip queues · Local prices</div>
+            </div>
+            <div class="ticket-card-arrow">›</div>
+          </div>
+          <div class="ticket-card-tags">
+            <span class="tct">🌿 Gardens by the Bay</span>
+            <span class="tct">🦁 Zoo &amp; Safari</span>
+            <span class="tct">🎢 Sentosa</span>
+            <span class="tct">🐠 Oceanarium</span>
+            <span class="tct">+ more</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="fx-col">
+      <div class="section-title">💱 Currency Converter</div>
+      <div class="accordion" style="margin-bottom:14px;">
+        <div style="padding:14px 14px 12px;">
+          <div class="fx-row" style="margin-top:0;">
+            <span class="fx-label">SGD Amount</span>
+            <input type="number" id="fxAmt" value="100" class="fx-input" oninput="fxConvert()">
+            <select id="fxCurr" class="fx-input" style="width:auto;cursor:pointer;" onchange="fxConvert()">
+              <option value="USD">USD</option>
+              <option value="AUD">AUD</option>
+              <option value="MYR">MYR</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+              <option value="CNY">CNY</option>
+            </select>
+            <div id="fxRes" class="fx-res">--</div>
+          </div>
+          <p class="fx-note">Live rates. 1 SGD to selected currency.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tickets-fx-row -->
 
   <div class="section-title">🚇 Getting Around</div>
   <div class="acc-controls">
@@ -2235,14 +2260,16 @@
 </div>
 
 <div class="screen" id="screen-sos">
-  <div class="hero-banner" style="background: linear-gradient(135deg, #7f1d1d, #991b1b);">
+  <div class="hero-banner" style="background: linear-gradient(135deg, #1a0a1e 0%, #3d0a2e 40%, #7b1645 75%, #c4334e 100%);">
     <div class="hero-tag">Emergency &amp; Help</div>
     <div class="hero-title">Stay Safe in Singapore 🆘</div>
     <div class="hero-desc">Singapore is one of the safest cities in the world, but emergencies happen. Keep these numbers saved!</div>
   </div>
 
-  <div class="section-title">🚨 Emergency Numbers</div>
+  <div class="sos-top-row">
+  <div class="sos-left-col">
 
+  <div class="section-title">🚨 Emergency Numbers</div>
 
   <div class="emergency-card">
     <div class="ec-icon">🚑</div>
@@ -2253,8 +2280,7 @@
     </div>
   </div>
 
-
-  <div class="emergency-card" style="background: linear-gradient(135deg, #b91c1c, #991b1b);">
+  <div class="emergency-card">
     <div class="ec-icon">👮</div>
     <div class="ec-text">
       <div class="ec-label">Police Emergency</div>
@@ -2262,7 +2288,6 @@
       <div class="ec-name">Singapore Police Force</div>
     </div>
   </div>
-
 
   <a href="#" onclick="openMessenger()" class="messenger-btn">
     <div class="mb-icon">💬</div>
@@ -2273,69 +2298,8 @@
     <div class="mb-arrow">→</div>
   </a>
 
-  <div class="section-title">🏥 Medical Help</div>
-
-
-  <div class="hospital-card">
-    <div class="hc-hosp-name">🏥 Singapore General Hospital</div>
-    <span class="hc-hosp-type public">Public</span>
-    <div class="hc-hosp-row">
-      <span>📍 Outram Road, Singapore 169608 · Outram Park MRT</span>
-      <span>🚑 A&amp;E: <a href="tel:+6562224321">+65 6222 4321</a></span>
-      <span>📞 Main: <a href="tel:+6562223322">+65 6222 3322</a></span>
-      <span>🕐 A&amp;E open 24 hours daily</span>
-    </div>
-  </div>
-
-
-  <div class="hospital-card">
-    <div class="hc-hosp-name">🏥 Tan Tock Seng Hospital</div>
-    <span class="hc-hosp-type public">Public</span>
-    <div class="hc-hosp-row">
-      <span>📍 11 Jalan Tan Tock Seng, Singapore 308433 · Novena MRT</span>
-      <span>🚑 A&amp;E: <a href="tel:+6562566011">+65 6256 6011</a></span>
-      <span>🕐 A&amp;E open 24 hours daily</span>
-    </div>
-  </div>
-
-
-  <div class="hospital-card">
-    <div class="hc-hosp-name">🏥 Raffles Hospital</div>
-    <span class="hc-hosp-type private">Private</span>
-    <div class="hc-hosp-row">
-      <span>📍 585 North Bridge Road, Singapore 188770 · Bugis MRT</span>
-      <span>🚑 A&amp;E: <a href="tel:+6563111555">+65 6311 1555</a></span>
-      <span>📞 Main: <a href="tel:+6563111111">+65 6311 1111</a></span>
-      <span>🕐 A&amp;E open 24 hours daily</span>
-    </div>
-  </div>
-
-
-  <div class="hospital-card">
-    <div class="hc-hosp-name">🏥 Mount Elizabeth Hospital Novena</div>
-    <span class="hc-hosp-type private">Private</span>
-    <div class="hc-hosp-row">
-      <span>📍 38 Irrawaddy Road, Singapore 329563 · Novena MRT</span>
-      <span>🚑 A&amp;E: <a href="tel:+6569330100">+65 6933 0100</a></span>
-      <span>🕐 A&amp;E open 24 hours daily</span>
-    </div>
-  </div>
-
-
-  <div class="hospital-card">
-    <div class="hc-hosp-name">🏥 Mount Elizabeth Hospital Orchard</div>
-    <span class="hc-hosp-type private">Private</span>
-    <div class="hc-hosp-row">
-      <span>📍 3 Mount Elizabeth, Singapore 228510 · Orchard MRT</span>
-      <span>🚑 A&amp;E: <a href="tel:+6567312218">+65 6731 2218</a></span>
-      <span>📞 Main: <a href="tel:+6573700700">+65 7370 0700</a></span>
-      <span>🕐 A&amp;E open 24 hours daily</span>
-    </div>
-  </div>
-
-  <div class="success-box">
-    <strong>💊 Minor Illnesses &amp; GP Clinics:</strong> Singapore has hundreds of 24-hour clinics. Use Google Maps and search "24-hour clinic near me" — these are affordable (S$20–$60 for a consultation) and have basic medications on-site. No appointment needed.
-  </div>
+  </div><!-- /sos-left-col -->
+  <div class="sos-right-col">
 
   <div class="section-title">🏦 Practical Emergency Help</div>
 
@@ -2364,6 +2328,71 @@
     </div>
   </div>
 
+  </div><!-- /sos-right-col -->
+  </div><!-- /sos-top-row -->
+
+  <!-- ── HOSPITALS + SAFETY: side by side on desktop ── -->
+  <div class="sos-bottom-row">
+  <div class="sos-hospitals-col">
+
+  <div class="section-title">🏥 Medical Help</div>
+
+  <div class="hospital-card">
+    <div class="hc-hosp-name">🏥 Singapore General Hospital</div>
+    <span class="hc-hosp-type public">Public</span>
+    <div class="hc-hosp-row">
+      <span>📍 Outram Road, Singapore 169608 · Outram Park MRT</span>
+      <span>🚑 A&amp;E: <a href="tel:+6562224321">+65 6222 4321</a></span>
+      <span>📞 Main: <a href="tel:+6562223322">+65 6222 3322</a></span>
+      <span>🕐 A&amp;E open 24 hours daily</span>
+    </div>
+  </div>
+
+  <div class="hospital-card">
+    <div class="hc-hosp-name">🏥 Tan Tock Seng Hospital</div>
+    <span class="hc-hosp-type public">Public</span>
+    <div class="hc-hosp-row">
+      <span>📍 11 Jalan Tan Tock Seng, Singapore 308433 · Novena MRT</span>
+      <span>🚑 A&amp;E: <a href="tel:+6562566011">+65 6256 6011</a></span>
+      <span>🕐 A&amp;E open 24 hours daily</span>
+    </div>
+  </div>
+
+  <div class="hospital-card">
+    <div class="hc-hosp-name">🏥 Raffles Hospital</div>
+    <span class="hc-hosp-type private">Private</span>
+    <div class="hc-hosp-row">
+      <span>📍 585 North Bridge Road, Singapore 188770 · Bugis MRT</span>
+      <span>🚑 A&amp;E: <a href="tel:+6563111555">+65 6311 1555</a></span>
+      <span>📞 Main: <a href="tel:+6563111111">+65 6311 1111</a></span>
+      <span>🕐 A&amp;E open 24 hours daily</span>
+    </div>
+  </div>
+
+  <div class="hospital-card">
+    <div class="hc-hosp-name">🏥 Mount Elizabeth Hospital Novena</div>
+    <span class="hc-hosp-type private">Private</span>
+    <div class="hc-hosp-row">
+      <span>📍 38 Irrawaddy Road, Singapore 329563 · Novena MRT</span>
+      <span>🚑 A&amp;E: <a href="tel:+6569330100">+65 6933 0100</a></span>
+      <span>🕐 A&amp;E open 24 hours daily</span>
+    </div>
+  </div>
+
+  <div class="hospital-card">
+    <div class="hc-hosp-name">🏥 Mount Elizabeth Hospital Orchard</div>
+    <span class="hc-hosp-type private">Private</span>
+    <div class="hc-hosp-row">
+      <span>📍 3 Mount Elizabeth, Singapore 228510 · Orchard MRT</span>
+      <span>🚑 A&amp;E: <a href="tel:+6567312218">+65 6731 2218</a></span>
+      <span>📞 Main: <a href="tel:+6573700700">+65 7370 0700</a></span>
+      <span>🕐 A&amp;E open 24 hours daily</span>
+    </div>
+  </div>
+
+  </div><!-- /sos-hospitals-col -->
+  <div class="sos-safety-col">
+
   <div class="section-title">✅ Safety Tips</div>
   <ul class="content-list">
     <li>Singapore is extremely safe — violent crime is very rare. Normal travel safety precautions are sufficient.</li>
@@ -2374,6 +2403,14 @@
     <li>There are no significant health risks specific to Singapore for most visitors. Standard vaccinations are sufficient.</li>
     <li>Theft is uncommon but pickpocketing can occur in crowded areas like markets — keep bags zipped.</li>
   </ul>
+
+  <div class="success-box">
+    <strong>💊 Minor Illnesses &amp; GP Clinics:</strong> Singapore has hundreds of 24-hour clinics. Use Google Maps and search "24-hour clinic near me" — these are affordable (S$20–$60 for a consultation) and have basic medications on-site. No appointment needed.
+  </div>
+
+  </div><!-- /sos-safety-col -->
+  </div><!-- /sos-bottom-row -->
+
 </div>
 
 <div class="ticker-fixed">
