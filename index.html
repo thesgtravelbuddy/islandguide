@@ -5,6 +5,23 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<style>
+  /* Disable text selection across the entire page */
+  * {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-touch-callout: none !important;
+  }
+  /* Allow selection only inside form inputs */
+  input, textarea, select {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    user-select: text !important;
+  }
+</style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Island Guide by The SG Travel Buddy 🇸🇬</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -120,7 +137,6 @@
 
   <div class="cover-section-label" style="margin-top:0;">A note from your travel buddy 🫰</div>
   <div class="buddy-letter">
-    <p></p>
     <p>We're so glad you're coming to Singapore. There is genuinely no city quite like it — a place where colonial shophouses stand beside glass towers, where a Michelin-starred hawker stall costs less than a coffee back home, and where the garden truly runs through the city.</p>
     <p>This guide was built to travel with you — from the moment you start planning, to your first hawker meal, to finding your way home after a late night. Use it at any stage of your trip.</p>
     <p>Read it at your own pace, and whenever you want a local perspective, you know where to find us.</p>
@@ -2549,4 +2565,84 @@
 </nav>
 
 <script src="script.js"></script>
+<script>
+(function() {
+
+  // ── Block right-click context menu
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+  });
+
+  // ── Block common keyboard shortcuts
+  document.addEventListener('keydown', function(e) {
+    const k = e.key.toLowerCase();
+    const ctrl = e.ctrlKey || e.metaKey;
+
+    // Block Ctrl/Cmd + C, X, A, U, S, P, Shift+I, Shift+J, Shift+C, F12
+    if (ctrl && ['c','x','a','u','s','p'].includes(k)) {
+      e.preventDefault(); return false;
+    }
+    // Block DevTools shortcuts
+    if (ctrl && e.shiftKey && ['i','j','c'].includes(k)) {
+      e.preventDefault(); return false;
+    }
+    if (e.key === 'F12') {
+      e.preventDefault(); return false;
+    }
+    // Block PrintScreen key (Windows — limited effect)
+    if (e.key === 'PrintScreen') {
+      e.preventDefault();
+      navigator.clipboard?.writeText('').catch(() => {});
+      return false;
+    }
+  });
+
+  // ── Block copy and cut events
+  document.addEventListener('copy', function(e) {
+    e.preventDefault();
+    e.clipboardData?.setData('text/plain', '');
+    return false;
+  });
+  document.addEventListener('cut', function(e) {
+    e.preventDefault();
+    return false;
+  });
+
+  // ── Block drag-to-copy
+  document.addEventListener('dragstart', function(e) {
+    e.preventDefault();
+    return false;
+  });
+
+  // ── Disable long-press text selection on touch devices
+  document.addEventListener('touchstart', function(e) {
+    if (e.touches.length > 1) e.preventDefault();
+  }, { passive: false });
+
+  // ── Detect DevTools open (basic heuristic — window size delta)
+  // When DevTools is docked, window.outerWidth > window.innerWidth significantly
+  var devtoolsOpen = false;
+  function checkDevTools() {
+    var threshold = 160;
+    var widthDiff = window.outerWidth - window.innerWidth;
+    var heightDiff = window.outerHeight - window.innerHeight;
+    if (widthDiff > threshold || heightDiff > threshold) {
+      if (!devtoolsOpen) {
+        devtoolsOpen = true;
+        document.body.style.filter = 'blur(8px)';
+        document.body.style.pointerEvents = 'none';
+      }
+    } else {
+      if (devtoolsOpen) {
+        devtoolsOpen = false;
+        document.body.style.filter = '';
+        document.body.style.pointerEvents = '';
+      }
+    }
+  }
+  setInterval(checkDevTools, 1000);
+
+})();
+</script>
 </html>
