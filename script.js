@@ -20,6 +20,9 @@ function expandAll(screenId) {
   const screen = document.getElementById(screenId);
   if (!screen) return;
   screen.querySelectorAll('.acc-header').forEach(h => {
+    // Skip the heavy dish accordion — too large to auto-expand
+    const name = h.querySelector('.acc-name');
+    if (name && name.textContent.includes('Must-Try Local Dishes')) return;
     h.classList.add('open');
     h.nextElementSibling.classList.add('open');
   });
@@ -329,7 +332,14 @@ async function loadLiveWeather() {
 }
 
 function showScreen(screenId) {
-
+  // When leaving food screen, collapse the dish accordion to prevent bleed
+  const prevFood = document.getElementById('screen-food');
+  if (prevFood && screenId !== 'food') {
+    prevFood.querySelectorAll('.acc-header.open').forEach(h => {
+      h.classList.remove('open');
+      if (h.nextElementSibling) h.nextElementSibling.classList.remove('open');
+    });
+  }
   document.body.classList.toggle('is-home', screenId === 'home');
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const screen = document.getElementById('screen-' + screenId);
