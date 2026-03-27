@@ -1,10 +1,7 @@
-// ──── NAVIGATION ────
-
-// ──── ACCORDION ────
 function toggleAcc(header) {
   const body = header.nextElementSibling;
   const isOpen = header.classList.contains('open');
-  // Only close accordions within the same active screen
+
   const activeScreen = document.querySelector('.screen.active');
   if (activeScreen) {
     activeScreen.querySelectorAll('.acc-header.open').forEach(h => {
@@ -37,22 +34,21 @@ function collapseAll(screenId) {
   });
 }
 
-// ──── SEARCH ────
 const SEARCH_INDEX = [
-  // Planning
+
   { screen: 'planning', section: 'planning', title: 'SG Arrival Card', keywords: 'arrival card digital sg immigration free official eservices.ica.gov.sg scam', snippet: 'Submit online up to 3 days before arrival — free and mandatory.' },
   { screen: 'planning', section: 'planning', title: 'Changi Airport Guide', keywords: 'changi airport terminal jewel rain vortex waterfall skytrain butterfly garden t1 t2 t3 t4 sleep snooze lounge luggage storage tourist help desk stb visitsingapore radical luggage hero', snippet: 'Terminals 1–4, Jewel, Rain Vortex, free sleeping areas, luggage storage & tourist help desks.' },
   { screen: 'planning', section: 'planning', title: 'Immigration & Customs', keywords: 'immigration customs passport visa chewing gum drugs declaration bribery red channel green channel tobacco duty free', snippet: 'Visa-free entry for most nationalities 30–90 days. Strict customs rules.' },
   { screen: 'planning', section: 'planning', title: 'SIM Cards & eSIM', keywords: 'sim card esim singtel starhub m1 simba data mobile 5g 4g tourist prepaid connectivity internet', snippet: 'Singtel, StarHub, M1 tourist SIMs from SGD$12. Bring passport to register.' },
   { screen: 'planning', section: 'planning', title: 'Currency & ATMs', keywords: 'currency exchange atm sgd dollar money changer orchard chinatown lucky plaza contactless apple pay google pay', snippet: 'Singapore Dollar (S$). Best rates at licensed money changers in city malls.' },
   { screen: 'planning', section: 'planning', title: 'Transport from Airport', keywords: 'airport transport mrt taxi grab hotel shuttle changi tanah merah last train 11pm', snippet: 'MRT ~S$2.50, Taxi ~S$25–40, Grab app recommended. Last MRT ~11:18pm.' },
-  // Ground
+
   { screen: 'ground', section: 'ground', title: 'MRT Guide', keywords: 'mrt mass rapid transit train bayfront orchard chinatown bugis harbourfront priority seat ezlink tourist pass simplygo last train first train operating hours peak 2026 circle line delay', snippet: 'First train ~5:30am, last ~11:30pm. Stand left on escalators. No food.' },
   { screen: 'ground', section: 'ground', title: 'Bus Guide', keywords: 'bus tap in out fare citymapper google maps route number stop air conditioned', snippet: 'Tap in AND out with card. Use Citymapper for real-time directions.' },
   { screen: 'ground', section: 'ground', title: 'Grab Gojek Taxis', keywords: 'grab gojek taxi ride hailing surge rain uber transport app night late booking', snippet: 'Grab is the main app. Prices surge in rain — wait 15min for it to pass.' },
   { screen: 'ground', section: 'ground', title: 'Walking Areas', keywords: 'walk walking marina bay tiong bahru joo chiat kampong glam fort canning covered walkway heat humidity', snippet: 'Best to walk before 10am or after 5pm. Covered walkways protect from rain.' },
   { screen: 'planning', section: 'planning', title: 'Must-Have Apps — Download Before You Fly', keywords: 'apps wise grab google maps cdg zig download app store play store payment forex transfer rides taxi navigation must have before fly', snippet: 'Wise (our preferred payment), Grab, Google Maps, CDG Zig — download before boarding.' },
-  // Places
+
   { screen: 'places', section: 'places', title: 'Marina Bay Sands', keywords: 'marina bay sands mbs infinity pool skypark observation deck casino spectra light show shoppes', snippet: 'Observation deck S$32. Free Spectra light show 8pm & 9pm nightly.' },
   { screen: 'places', section: 'places', title: 'Gardens by the Bay', keywords: 'gardens by the bay supertrees cloud forest flower dome garden rhapsody skyway ocbc free light show 7:45pm', snippet: 'Outdoor Supertree Grove is free. Garden Rhapsody light show at 7:45pm & 8:45pm.' },
   { screen: 'places', section: 'places', title: 'Merlion Park', keywords: 'merlion park statue raffles place free photo national symbol lion fish', snippet: 'Free entry. Best photos at night with MBS behind. Raffles Place MRT.' },
@@ -67,7 +63,7 @@ const SEARCH_INDEX = [
   { screen: 'places', section: 'places', title: 'Joo Chiat Katong', keywords: 'joo chiat katong peranakan shophouse colourful pastel heritage nonya laksa koon seng road', snippet: 'Pastel Peranakan shophouses, Nonya food, Koon Seng Road. Paya Lebar MRT.' },
   { screen: 'places', section: 'places', title: 'Orchard Road Shopping', keywords: 'orchard road shopping mall ion ngee ann city paragon 313 somerset christmas luxury', snippet: 'ION Orchard, Ngee Ann City, Paragon. Connected by underground walkways.' },
   { screen: 'places', section: 'places', title: 'Clarke Quay Nightlife', keywords: 'clarke quay nightlife bar club riverside drinks happy hour dress code', snippet: 'Riverside bars and clubs. Happy hour early evening. Smart casual dress.' },
-  // Food
+
   { screen: 'food', section: 'food', title: 'Hawker Centres — How They Work', keywords: 'hawker centre chope tissue reserve seat tray return cash order self service peak hour queue', snippet: '"Chope" a seat with tissues. Return your tray. Cash for most stalls.' },
   { screen: 'food', section: 'food', title: 'Best Hawker Centres', keywords: 'maxwell food centre chinatown complex lau pa sat old airport road newton tekka centre hawker', snippet: 'Maxwell, Chinatown Complex, Lau Pa Sat, Old Airport Road, Tekka Centre.' },
   { screen: 'food', section: 'food', title: 'Hainanese Chicken Rice', keywords: 'chicken rice hainanese national dish tian tian poached roasted boon tong kee wee nam kee', snippet: 'Singapore\'s national dish. Silky chicken, fragrant rice, chilli on side.' },
@@ -85,7 +81,7 @@ const SEARCH_INDEX = [
   { screen: 'food', section: 'food', title: 'Michelin Guide Singapore 2025', keywords: 'michelin star hawker tai hwa bak chor mee crawford lane bib gourmand 2025 tian tian outram park sungei road laksa song fa nam sing hokkien lao fu zi sin heng claypot eminent frog jian bo chwee kueh boon tong kee kitchenman nasi lemak song kee fish porridge address opening hours', snippet: '1 Michelin Star hawker: Hill Street Tai Hwa (Crawford Lane). 13 Bib Gourmand picks with addresses.' },
   { screen: 'food', section: 'food', title: 'Late-Night Food', keywords: 'late night food geylang midnight supper frog porridge changi village holland village 24 hour', snippet: 'Geylang open until sunrise. Changi Village nasi lemak at midnight.' },
   { screen: 'food', section: 'food', title: 'Halal Food', keywords: 'halal muis malay indian hawker halal sg app certified muslim mosque tekka', snippet: 'MUIS certified. All Malay and most Indian stalls are Halal.' },
-  // Culture
+
   { screen: 'culture', section: 'culture', title: 'Understanding Singaporeans', keywords: 'kiasu culture efficiency composure reserved private friendly singlish social norms behaviour', snippet: 'Efficient and reserved in public. Kiasu = afraid to lose out.' },
   { screen: 'culture', section: 'culture', title: 'Singlish Dictionary', keywords: 'singlish lah can shiok makan atas alamak walao blur chope kiasu language local', snippet: 'Lah, shiok, makan, chope, kiasu, blur, walao — hear these constantly!' },
   { screen: 'culture', section: 'culture', title: 'MRT & Transport Etiquette', keywords: 'escalator left stand right walk mrt backpack priority seat doorway queue phone volume headphones', snippet: 'Left stand, right walk on escalators. Backpacks off in crowded trains.' },
@@ -94,7 +90,7 @@ const SEARCH_INDEX = [
   { screen: 'culture', section: 'culture', title: 'Laws — Vaping & Smoking', keywords: 'vaping e-cigarette ban illegal smoking designated area DSA fine S$1000 no vape', snippet: 'Vaping is completely banned. Smoking only in designated areas (DSAs).' },
   { screen: 'culture', section: 'culture', title: 'Laws — Drugs & Alcohol', keywords: 'drugs marijuana zero tolerance death penalty possession trafficking alcohol public 10:30pm little india zone', snippet: 'Zero drug tolerance — death penalty for trafficking. No public alcohol after 10:30pm.' },
   { screen: 'culture', section: 'culture', title: 'Laws — Eating on MRT & Drones', keywords: 'eating drinking mrt station fine S$500 drone permit CAAS restricted area fly', snippet: 'No food on MRT (S$500 fine). Drones require permit — most areas restricted.' },
-  // SOS
+
   { screen: 'sos', section: 'sos', title: 'Emergency Numbers 995 & 999', keywords: 'emergency ambulance fire 995 police 999 SCDF SPF call help', snippet: '995 = Ambulance/Fire. 999 = Police. Save these before you land!' },
   { screen: 'sos', section: 'sos', title: 'Hospitals & Medical Help', keywords: 'hospital emergency AE Singapore General SGH Tan Tock Seng Raffles clinic doctor GP', snippet: 'SGH, Tan Tock Seng, Raffles Hospital all have 24-hr A&E.' },
   { screen: 'sos', section: 'sos', title: 'Lost Passport', keywords: 'lost passport embassy immigration checkpoints authority immigration stolen emergency travel document consulate', snippet: 'Contact your embassy first. Immigration & Checkpoints Authority hotline: 6391 6100.' },
@@ -150,7 +146,7 @@ function handleSearch(query) {
 function goToResult(screenId) {
   clearSearch();
   switchTab(screenId);
-  // Give screen time to activate, then expand all so content is visible
+
   setTimeout(() => expandAll('screen-' + screenId), 150);
 }
 
@@ -170,7 +166,6 @@ function highlightText(text, words) {
   return result;
 }
 
-// ──── IMAGE LOADER ────
 function imgLoaded(img, phId) {
   img.classList.remove('loading');
   img.classList.add('loaded');
@@ -182,7 +177,7 @@ function imgError(img, phId, fallbackSrc) {
   if (img.src !== fallbackSrc) {
     img.src = fallbackSrc;
   } else {
-    // Both URLs failed — show emoji placeholder prominently
+
     img.style.display = 'none';
     const ph = document.getElementById(phId);
     if (ph) {
@@ -192,16 +187,8 @@ function imgError(img, phId, fallbackSrc) {
   }
 }
 
-// Lazy-load all dish images when page loads
-function initDishImages() {
-  document.querySelectorAll('.dish-img-wrap img[data-src]').forEach(img => {
-    img.src = img.dataset.src;
-  });
-}
-
-// ──── TICKERS ────
 async function loadTickers() {
-  // FX Ticker
+
   try {
     const rf = await fetch('https://open.er-api.com/v6/latest/SGD');
     const df = await rf.json();
@@ -213,15 +200,15 @@ async function loadTickers() {
         .filter(s => rates[s])
         .map(s => `<span class="ticker-item"><span class="t-icon">💱</span>SGD/${s}: ${rates[s].toFixed(3)}</span>`)
         .join('') + syms.filter(s => rates[s]).map(s => `<span class="ticker-item"><span class="t-icon">💱</span>SGD/${s}: ${rates[s].toFixed(3)}</span>`).join('');
-      // Also update FX converter if rates already loaded
-      if (!fxLoaded) { fxRates = rates; fxLoaded = true; fxConvert(); }
+
+      if (!fxLastLoaded) { fxRates = rates; fxLastLoaded = Date.now(); fxConvert(); }
     }
   } catch(e) {
     const t = document.getElementById('fxTickerTrack');
     if (t) t.innerHTML = '<span class="ticker-item">💱 Forex rates temporarily unavailable</span>';
   }
 
-  // CNA News Ticker
+
   try {
     const rn = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.channelnewsasia.com%2Fapi%2Fv1%2Frss-outbound-feed%3F_format%3Dxml%26category%3D10416');
     const dn = await rn.json();
@@ -237,16 +224,14 @@ async function loadTickers() {
   }
 }
 
-// Init on page load
 document.addEventListener('DOMContentLoaded', () => {
-  // Ensure correct initial layout if Home is the default active screen
+
   document.body.classList.toggle('is-home', !!document.getElementById('screen-home')?.classList.contains('active'));
   loadTickers();
-  initDishImages();
+
+  setInterval(loadTickers, 30 * 60 * 1000);
   initFontScaling();
 });
-if (document.readyState !== 'loading') { loadTickers(); }
-if (document.readyState !== 'loading') { initFontScaling(); }
 
 function escapeHtml(s) {
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -255,12 +240,11 @@ function escapeRegex(s) {
   return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
 }
 
-// ──── PLUG FLIP CARD ────
 function togglePlugFlip(card) {
   const isFlipped = card.classList.contains('flipped');
   const inner = card.querySelector('.flip-card-inner');
   card.classList.toggle('flipped');
-  // Pre-load the image when first flipped
+
   if (!isFlipped) {
     const img = card.querySelector('.flip-back img');
     if (img && img.getAttribute('loading') === 'eager') {
@@ -269,7 +253,6 @@ function togglePlugFlip(card) {
   }
 }
 
-// ──── LIVE SINGAPORE CLOCK ────
 function updateSGClock() {
   const now = new Date();
   const sgOptions = { timeZone: 'Asia/Singapore' };
@@ -283,7 +266,6 @@ function updateSGClock() {
 updateSGClock();
 setInterval(updateSGClock, 1000);
 
-// Open the apps accordion when teaser is tapped
 function openAppsAcc() {
   const planningScreen = document.getElementById('screen-planning');
   if (planningScreen && !planningScreen.classList.contains('active')) {
@@ -305,24 +287,23 @@ function openAppsAcc() {
   }, 100);
 }
 
-// ──── MESSENGER ────
 function openMessenger() {
   const appLink = "fb-messenger://user-thread/115403788266848";
   const webLink = "https://m.me/115403788266848";
 
-  // Try opening Messenger app
+
   window.location.href = appLink;
 
-  // Fallback to web if app doesn't open
+
   setTimeout(() => {
     window.location.href = webLink;
   }, 800);
 }
 
-// ──── LIVE WEATHER ────
-let weatherLoaded = false;
+let weatherLastLoaded = 0;
 async function loadLiveWeather() {
-  if (weatherLoaded) return;
+  const now = Date.now();
+  if (now - weatherLastLoaded < 30 * 60 * 1000) return;
   try {
     const r = await fetch('https://api-open.data.gov.sg/v2/real-time/api/two-hr-forecast');
     const d = await r.json();
@@ -344,12 +325,11 @@ async function loadLiveWeather() {
       return `<div class="lwp-day"><div class="lwp-day-name">${day}</div><div class="lwp-day-out">${outlook}</div><div class="lwp-day-temp">${hi}°</div></div>`;
     }).join('');
   } catch(e) { console.error('4-day forecast error', e); }
-  weatherLoaded = true;
+  weatherLastLoaded = Date.now();
 }
 
-// Load weather when ground tab is opened
 function showScreen(screenId) {
-  // Do NOT collapse accordions — preserve open state so users can pick up where they left off
+
   document.body.classList.toggle('is-home', screenId === 'home');
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const screen = document.getElementById('screen-' + screenId);
@@ -371,25 +351,24 @@ function switchTab(tab) {
   const btn = document.getElementById('tab-' + tab);
   if (btn) btn.classList.add('active');
   showScreen(tab);
-  if (tab === 'food') setTimeout(initDishImages, 80);
+
 }
 
-// Also load when accordion opens
 document.addEventListener('click', function(e) {
   const btn = e.target.closest('#ground-weather-acc .acc-header');
   if (btn) setTimeout(loadLiveWeather, 100);
 });
 
-// ──── FX CONVERTER ────
 let fxRates = {};
-let fxLoaded = false;
+let fxLastLoaded = 0;
 async function loadFxRates() {
-  if (fxLoaded) return;
+  const now = Date.now();
+  if (now - fxLastLoaded < 30 * 60 * 1000) return;
   try {
     const r = await fetch('https://open.er-api.com/v6/latest/SGD');
     const d = await r.json();
     fxRates = d.rates || {};
-    fxLoaded = true;
+    fxLastLoaded = Date.now();
     fxConvert();
   } catch(e) { console.error('FX error', e); }
 }
@@ -402,7 +381,6 @@ function fxConvert() {
   }
 }
 
-// ──── ATTRACTIONS CAROUSEL ────
 const gAttractions = [
   { name: "328 Katong Laksa", q: "328+Katong+Laksa+Singapore" },
   { name: "Adventure Cove Waterpark", q: "Adventure+Cove+Waterpark+Sentosa" },
@@ -465,7 +443,6 @@ function initCarousel() {
   gCarouselInit = true;
 }
 
-// Grid-based 2x2 display for "How to Get To"
 let gGridPage = 0;
 const G_GRID_PER_PAGE = 4;
 
@@ -510,22 +487,15 @@ function populateGCarousel() {
   }).join('');
 }
 
-// filterGAttractions defined above
-
 function scrollGCarousel(dir) {
   const track = document.getElementById('gCarouselTrack');
   if (track) track.scrollBy({ left: dir * 180, behavior: 'smooth' });
 }
 
-// ════════════════════════════════════════════════════════
-// FONT SIZE CONTROLS (FINAL FIX)
-// ════════════════════════════════════════════════════════
-
 let currentFontScale = 1.0;
 const fontScales = [0.85, 0.9, 0.95, 1.0, 1.08, 1.16, 1.25, 1.4, 1.6, 1.8, 2.0];
 let fontScaleIdx = 3;
 
-// Pre-cache base font sizes (works even when accordions are closed)
 function initFontScaling() {
 const elements = document.querySelectorAll(
   'p, span, li, a, button, label, strong, em, b, i, h1, h2, h3, h4, h5, h6, div'
@@ -553,7 +523,7 @@ function changeFontSize(dir) {
     el.style.fontSize = newSize + 'px';
   });
 }
-// ════════════════════════════════════════════════════════
+
 const FS_KEY = 'sgFlashSales_v1';
 let fsSales = [];
 let fsCurrentIdx = 0;
@@ -577,7 +547,7 @@ function fsLoadSales() {
     const raw = localStorage.getItem(FS_KEY);
     const all = raw ? JSON.parse(raw) : [];
     const today = fsTodaySGT();
-    // Only active, non-expired, sorted newest first (already stored that way)
+
     fsSales = all.filter(s => s.active && s.usedBy >= today);
   } catch(e) { fsSales = []; }
 }
@@ -611,15 +581,15 @@ function fsRenderSlides() {
     </div>`;
   }).join('');
 
-  // Dots
+
   dotRow.innerHTML = fsSales.map((_, i) =>
     `<div class="fs-dot ${i === 0 ? 'active' : ''}"></div>`
   ).join('');
 
-  // Counter
+
   counter.textContent = fsSales.length > 1 ? `1 of ${fsSales.length}` : '1 deal';
 
-  // Show/hide swipe hint and nav
+
   if (fsSales.length <= 1) {
     hint.classList.add('hidden');
     nav.style.display = 'none';
@@ -638,12 +608,12 @@ function fsGoTo(idx) {
   const slides = document.getElementById('fsSlides');
   slides.style.transform = `translateX(-${idx * 100}%)`;
 
-  // Update dots
+
   document.querySelectorAll('.fs-dot').forEach((d, i) => {
     d.classList.toggle('active', i === idx);
   });
 
-  // Counter
+
   document.getElementById('fsBannerCounter').textContent =
     fsSales.length > 1 ? `${idx+1} of ${fsSales.length}` : '1 deal';
 
@@ -669,7 +639,7 @@ function openFlashBanner() {
   overlay.style.display = 'flex';
   fsShown = true;
 
-  // Touch/swipe support
+
   const wrap = document.getElementById('fsSlideWrap');
   wrap.addEventListener('touchstart', e => { fsTouchStartX = e.touches[0].clientX; }, { passive: true });
   wrap.addEventListener('touchend', e => {
@@ -693,8 +663,6 @@ function handleOverlayClick(e) {
   }
 }
 
-// Show flash banner when home screen is active (with slight delay for UX)
-// Also re-check when storage changes (e.g. new sale added in indexFS)
 function checkAndShowFlashBanner() {
   fsLoadSales();
   if (fsSales.length > 0 && !fsShown) {
@@ -702,7 +670,6 @@ function checkAndShowFlashBanner() {
   }
 }
 
-// Listen for sales added/changed from indexFS.html
 window.addEventListener('storage', function(e) {
   if (e.key === FS_KEY) {
     fsLoadSales();
@@ -715,15 +682,14 @@ window.addEventListener('storage', function(e) {
   }
 });
 
-// Show on page load if we're on home screen
 document.addEventListener('DOMContentLoaded', function() {
   if (document.getElementById('screen-home').classList.contains('active')) {
     checkAndShowFlashBanner();
   }
-  // Pre-populate grid if ground screen is active on load
+
   if (document.getElementById('screen-ground') && document.getElementById('screen-ground').classList.contains('active')) {
     initCarousel();
   }
-  // Always init grid data so it's ready
+
   setTimeout(function(){ if(!gCarouselInit){ initCarousel(); } }, 300);
 });
