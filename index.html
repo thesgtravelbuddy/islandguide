@@ -137,9 +137,14 @@
 
   <div class="cover-section-label" style="margin-top:0;">A note from your travel buddy 🫰</div>
   <div class="buddy-letter">
-    <p>We're so glad you're coming to Singapore. There is genuinely no city quite like it — a place where colonial shophouses stand beside glass towers, where a Michelin-starred hawker stall costs less than a coffee back home, and where the garden truly runs through the city.</p>
-    <p>This guide was built to travel with you — from the moment you start planning, to your first hawker meal, to finding your way home after a late night. Use it at any stage of your trip.</p>
-    <p>Read it at your own pace, and whenever you want a local perspective, you know where to find us.</p>
+    <p>Hey — welcome to Singapore 👋</p>
+    <p>This isn't another "top 10 things to do" guide — LOL. This is the page you keep open for your entire trip.</p>
+    <p>Everything you actually need is here — planning tools, key information, links that work, and things organised in a way that makes sense when you're on the ground. No jumping between 15 tabs, no random blogs, no guessing if the info is outdated.</p>
+    <p>Singapore is easy... but only if you know how to move around it properly. If not, you end up wasting time, backtracking, overpaying, or just doing things in a way that's more tiring than it needs to be.</p>
+    <p>I used to be a tourist here too. Now Singapore is home — but I haven't forgotten what it's like landing here for the first time, getting "scolded" for taking chopsticks from a hawker stall I hadn't ordered from. 😅</p>
+    <p>This guide is built with that in mind. Use it to plan your days, check things on the go, and adjust when plans change — and they will. Weather, queues, energy levels. It happens.</p>
+    <p>No fluff. No "presentation slide" recommendations. Just what actually works when you're here.</p>
+    <p>Keep this open, and you'll be fine.</p>
     <div class="buddy-letter-sig">— The SG Travel Buddy</div>
   </div>
 
@@ -2619,29 +2624,6 @@
   document.addEventListener('touchstart', function(e) {
     if (e.touches.length > 1) e.preventDefault();
   }, { passive: false });
-
-  // ── Detect DevTools open (basic heuristic — window size delta)
-  // When DevTools is docked, window.outerWidth > window.innerWidth significantly
-  var devtoolsOpen = false;
-  function checkDevTools() {
-    var threshold = 160;
-    var widthDiff = window.outerWidth - window.innerWidth;
-    var heightDiff = window.outerHeight - window.innerHeight;
-    if (widthDiff > threshold || heightDiff > threshold) {
-      if (!devtoolsOpen) {
-        devtoolsOpen = true;
-        document.body.style.filter = 'blur(8px)';
-        document.body.style.pointerEvents = 'none';
-      }
-    } else {
-      if (devtoolsOpen) {
-        devtoolsOpen = false;
-        document.body.style.filter = '';
-        document.body.style.pointerEvents = '';
-      }
-    }
-  }
-  setInterval(checkDevTools, 1000);
 
 })();
 </script>
