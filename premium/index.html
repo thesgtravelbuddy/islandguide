@@ -30,6 +30,35 @@
 </head>
 <body>
 
+++++++++ lock page
+<script>
+async function checkAccess() {
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("t");
+
+  if (!token) {
+    document.body.innerHTML = "No access.";
+    return;
+  }
+
+  const res = await fetch("https://sheetdb.io/api/v1/YOUR_API_ID");
+  const data = await res.json();
+
+  const now = new Date();
+
+  const valid = data.some(entry =>
+    entry.token === token && new Date(entry.expiry) > now
+  );
+
+  if (!valid) {
+    document.body.innerHTML = "Access expired.";
+  }
+}
+
+checkAccess();
+</script>
+++++++++
+  
 <div class="flash-sale-overlay" id="flashSaleOverlay" style="display:none;" onclick="handleOverlayClick(event)">
   <div class="flash-sale-box" id="flashSaleBox">
 
