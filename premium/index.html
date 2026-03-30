@@ -2,105 +2,34 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!-- CRITICAL: Hide body immediately before any JS runs -->
-<style>body{display:none !important;visibility:hidden !important;}</style>
-
-<script>
-const JSONBIN_BIN_ID = "69caa9b3856a682189e2366f";
-const JSONBIN_API_KEY = "$2a$10$07mjm685J1B3b6uZQYL1K.oskFLjjpDqSHvrpwXX19DlDF6DZjRt.";
-
-(async function checkAccess() {
-  const params = new URLSearchParams(window.location.search);
-  const token = params.get("t");
-  
-  console.log("[AUTH] Token:", token);
-  
-  // If no token in URL, show error immediately
-  if (!token) {
-    showError("Access Required", "Please use the link from your email");
-    return;
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<style>
+  /* Disable text selection across the entire page */
+  * {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-touch-callout: none !important;
   }
-  
-  // Check session cache
-  if (sessionStorage.getItem('sg_token') === token) {
-    console.log("[AUTH] Using cached session");
-    showContent();
-    return;
+  /* Allow selection only inside form inputs */
+  input, textarea, select {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    user-select: text !important;
   }
-
-  try {
-    const res = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
-      headers: {
-        "X-Master-Key": JSONBIN_API_KEY,
-        "X-Bin-Meta": "false"
-      }
-    });
-
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    
-    const data = await res.json();
-    console.log("[AUTH] Data received:", data);
-    
-    // Handle both structures: direct array or {tokens: array}
-    const tokens = data.record?.tokens || data.record;
-    
-    if (!Array.isArray(tokens)) {
-      throw new Error("Invalid data format");
-    }
-    
-    const valid = tokens.find(row => row.token === token);
-    
-    if (!valid) {
-      showError("Invalid Link", "This access link is not recognized");
-      return;
-    }
-    
-    if (new Date(valid.expires) < new Date()) {
-      showError("Access Expired", "Please purchase new access");
-      return;
-    }
-    
-    // Success
-    console.log("[AUTH] Access granted");
-    sessionStorage.setItem('sg_token', token);
-    showContent();
-    
-  } catch (e) {
-    console.error("[AUTH] Error:", e);
-    showError("Error", "Cannot verify access. Please check your connection or contact support.");
-  }
-})();
-
-function showContent() {
-  // Reveal body
-  document.body.style.display = 'block';
-  document.body.style.visibility = 'visible';
-}
-
-function showError(title, msg) {
-  // Keep body hidden, show error in a new div appended to html
-  const errorDiv = document.createElement('div');
-  errorDiv.innerHTML = `
-    <div style="font-family:system-ui,sans-serif;max-width:400px;margin:100px auto;text-align:center;padding:20px;">
-      <h2>🔒 ${title}</h2>
-      <p>${msg}</p>
-      <a href="mailto:you@email.com?subject=Access Request" 
-         style="display:inline-block;margin-top:20px;padding:12px 24px;background:#7b1645;color:white;text-decoration:none;border-radius:8px;">
-        Contact for Access
-      </a>
-    </div>
-  `;
-  document.body.innerHTML = ''; // Clear any flash of content
-  document.body.appendChild(errorDiv);
-  document.body.style.display = 'block';
-  document.body.style.visibility = 'visible';
-}
-</script>
-
-<!-- REST OF YOUR HTML CONTENT BELOW -->
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Island Guide by The SG Travel Buddy 🇸🇬</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
- 
+
 <div class="flash-sale-overlay" id="flashSaleOverlay" style="display:none;" onclick="handleOverlayClick(event)">
   <div class="flash-sale-box" id="flashSaleBox">
 
@@ -612,6 +541,8 @@ function showError(title, msg) {
         <span class="tip-label">📸 Photo Tip</span>
         Multiple levels give you different perspectives for photos! And for something special, catch the <strong>free Skytrain from T2 to T3</strong> and look to your left - thank us later :)
       </div>
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
       <h3 class="content-h3">✈️ Airside Attractions (for Transit Passengers)</h3>
       <p class="content-p">If you have a layover, don't just sit at the gate. Changi's transit areas have genuinely amazing free attractions:</p>
@@ -2470,5 +2401,4 @@ function showError(title, msg) {
 })();
 </script>
 
-</body>
 </html>
