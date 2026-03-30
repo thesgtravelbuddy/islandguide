@@ -27,6 +27,69 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+
+<script>
+// SIMPLE GOOGLE SHEETS PROTECTION
+(async function checkAccess() {
+  // Hide page until verified
+  document.documentElement.style.display = 'none';
+  
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("t");
+  
+  // SheetDB API - REPLACE THIS WITH YOURS
+  const API_URL = "https://sheetdb.io/api/v1/4xobfywr5w487E";
+  
+  if (!token) {
+    showError("Access Required", "Please use the link from your email");
+    return;
+  }
+
+  try {
+    // Fetch valid tokens from your sheet
+    const res = await fetch(`${API_URL}?sheet=Sheet1`);
+    const data = await res.json();
+    
+    // Find matching token
+    const valid = data.find(row => row.token === token);
+    
+    if (!valid) {
+      showError("Invalid Link", "This access link is not recognized");
+      return;
+    }
+    
+    // Check expiry
+    if (new Date(valid.expires) < new Date()) {
+      showError("Access Expired", "Please purchase new access");
+      return;
+    }
+    
+    // SUCCESS - Show the guide
+    document.documentElement.style.display = 'block';
+    
+    // Optional: Store in memory so refresh keeps working (until tab closes)
+    sessionStorage.setItem('sg_token', token);
+    
+  } catch (e) {
+    showError("Error", "Cannot verify access. Please refresh.");
+  }
+})();
+
+function showError(title, msg) {
+  document.documentElement.style.display = 'block';
+  document.body.innerHTML = `
+    <div style="font-family:system-ui,sans-serif;max-width:400px;margin:100px auto;text-align:center;padding:20px;">
+      <h2>🔒 ${title}</h2>
+      <p>${msg}</p>
+      <a href="mailto:you@email.com?subject=Access Request" 
+         style="display:inline-block;margin-top:20px;padding:12px 24px;background:#7b1645;color:white;text-decoration:none;border-radius:8px;">
+        Contact for Access
+      </a>
+    </div>
+  `;
+}
+</script>
+
 </head>
 <body>
  
@@ -2399,33 +2462,5 @@
 })();
 </script>
 
-++++++++ lock page
-<script>
-async function checkAccess() {
-  const params = new URLSearchParams(window.location.search);
-  const token = params.get("t");
-
-  if (!token) {
-    document.body.innerHTML = "No access.";
-    return;
-  }
-
-  const res = await fetch("https://sheetdb.io/api/v1/YOUR_API_ID");
-  const data = await res.json();
-
-  const now = new Date();
-
-  const valid = data.some(entry =>
-    entry.token === token && new Date(entry.expiry) > now
-  );
-
-  if (!valid) {
-    document.body.innerHTML = "Access expired.";
-  }
-}
-
-checkAccess();
-</script>
-++++++++
 </body>
 </html>
