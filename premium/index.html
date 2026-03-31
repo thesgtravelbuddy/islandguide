@@ -6,6 +6,141 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+
+<!-- ═══════════════════════════════════════════════════════════
+     TOKEN GATE — Must be the very first script on the page.
+     Hides all content immediately, then validates the token.
+     ═══════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  // ── IMPORTANT: Replace this URL with your Cloudflare Worker URL after deployment
+  var WORKER_URL = "https://island-guide-backend.the-sg-travel-buddy.workers.dev";
+
+  // Hide the entire page instantly — shown only after token validates
+  document.documentElement.style.visibility = "hidden";
+  document.documentElement.style.overflow = "hidden";
+
+  // Get token from URL (?t=TOKEN) or from sessionStorage (cached valid session)
+  var params = new URLSearchParams(window.location.search);
+  var token = params.get("t") || sessionStorage.getItem("ig_token");
+
+  if (!token) {
+    // No token — show access denied immediately without calling the server
+    document.addEventListener("DOMContentLoaded", showAccessDenied);
+    document.documentElement.style.visibility = "visible";
+    return;
+  }
+
+  // Check if we already validated this token this session (avoids extra API call)
+  var cached = sessionStorage.getItem("ig_valid");
+  var cachedToken = sessionStorage.getItem("ig_token");
+  if (cached === "1" && cachedToken === token) {
+    // Already validated — restore visibility immediately
+    document.addEventListener("DOMContentLoaded", function() {
+      document.documentElement.style.visibility = "visible";
+      document.documentElement.style.overflow = "";
+      // Clean the token from URL bar for privacy
+      if (params.get("t")) {
+        history.replaceState(null, "", window.location.pathname);
+      }
+      showWelcomeBanner();
+    });
+    return;
+  }
+
+  // Validate token with our Worker
+  fetch(WORKER_URL + "/validate?t=" + encodeURIComponent(token), {
+    method: "GET",
+    headers: { "Cache-Control": "no-cache" }
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    if (data.valid) {
+      // Token valid — cache it for this session and show the page
+      sessionStorage.setItem("ig_token", token);
+      sessionStorage.setItem("ig_valid", "1");
+      sessionStorage.setItem("ig_days_left", data.daysLeft || "");
+      sessionStorage.setItem("ig_name", data.customerName || "");
+      document.documentElement.style.visibility = "visible";
+      document.documentElement.style.overflow = "";
+      // Clean token from URL
+      if (params.get("t")) {
+        history.replaceState(null, "", window.location.pathname);
+      }
+      document.addEventListener("DOMContentLoaded", showWelcomeBanner);
+    } else {
+      // Token invalid, expired, or not found
+      document.documentElement.style.visibility = "visible";
+      document.addEventListener("DOMContentLoaded", function() {
+        showAccessDenied(data.reason);
+      });
+    }
+  })
+  .catch(function() {
+    // Network error — fail open to not lock out valid users during outages
+    // (The Worker has rate limiting so this is acceptable)
+    document.documentElement.style.visibility = "visible";
+    document.documentElement.style.overflow = "";
+    document.addEventListener("DOMContentLoaded", function() {
+      showOfflineWarning();
+    });
+  });
+
+  function showAccessDenied(reason) {
+    var isExpired = reason === "expired";
+    var msg = isExpired
+      ? "Your access link has expired after 21 days."
+      : "This page requires a valid access link.";
+
+    document.body.innerHTML = [
+      '<div style="min-height:100vh;background:#0d1a0f;display:flex;align-items:center;justify-content:center;font-family:Arial,sans-serif;padding:20px;box-sizing:border-box">',
+      '<div style="background:#fff;border-radius:16px;padding:40px 32px;max-width:420px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.4)">',
+      '<div style="font-size:48px;margin-bottom:16px">🔒</div>',
+      '<h1 style="font-size:22px;color:#1a472a;margin:0 0 12px">Premium Access Required</h1>',
+      '<p style="color:#666;font-size:15px;line-height:1.6;margin:0 0 24px">' + msg + '</p>',
+      isExpired
+        ? '<a href="https://buy.stripe.com/6oUeVc49helb4MLc7C5Rm01" style="display:block;background:#1a472a;color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:15px;font-weight:bold;margin-bottom:12px">Get a new link →</a>'
+        : '<a href="https://buy.stripe.com/6oUeVc49helb4MLc7C5Rm01" style="display:block;background:#1a472a;color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:15px;font-weight:bold;margin-bottom:12px">Get the Island Guide →</a>',
+      '<p style="font-size:12px;color:#aaa;margin:16px 0 0">Already purchased? Check your email for the magic link. Contact us if you need help.</p>',
+      '</div></div>'
+    ].join("");
+  }
+
+  function showOfflineWarning() {
+    var banner = document.createElement("div");
+    banner.style.cssText = "position:fixed;top:0;left:0;right:0;background:#f59e0b;color:#7c2d12;padding:10px;text-align:center;font-size:13px;z-index:99999;font-family:Arial,sans-serif";
+    banner.textContent = "⚠️ Could not verify your access — you appear to be offline. Some features may not work.";
+    document.body.insertBefore(banner, document.body.firstChild);
+  }
+
+  function showWelcomeBanner() {
+    var daysLeft = sessionStorage.getItem("ig_days_left");
+    var name = sessionStorage.getItem("ig_name");
+    var greeting = name ? "Welcome back, " + name.split(" ")[0] + "!" : "Welcome back!";
+
+    // Only show on first visit (not every page load)
+    if (sessionStorage.getItem("ig_welcomed")) return;
+    sessionStorage.setItem("ig_welcomed", "1");
+
+    var banner = document.createElement("div");
+    banner.id = "ig-welcome-banner";
+    banner.style.cssText = [
+      "position:fixed;top:0;left:0;right:0;z-index:99999;",
+      "background:#1a472a;color:#fff;padding:10px 16px;",
+      "display:flex;align-items:center;justify-content:space-between;",
+      "font-family:Arial,sans-serif;font-size:13px;"
+    ].join("");
+    banner.innerHTML = [
+      '<span>✅ ' + greeting + (daysLeft ? " Access valid for " + daysLeft + " more days." : "") + "</span>",
+      '<button onclick="this.parentElement.remove()" style="background:rgba(255,255,255,0.2);border:none;color:#fff;cursor:pointer;padding:4px 10px;border-radius:4px;font-size:12px">✕</button>'
+    ].join("");
+    document.body.insertBefore(banner, document.body.firstChild);
+    setTimeout(function() {
+      if (banner.parentElement) banner.remove();
+    }, 6000);
+  }
+})();
+</script>
 <style>
   /* Disable text selection across the entire page */
   * {
