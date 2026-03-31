@@ -1,1 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Island Guide — Admin</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #1a472a;
+    --green-light: #2d6a4f;
+    --green-bg: #f0faf4;
+    --amber: #d97706;
+    --red: #dc2626;
+    --gray: #6b7280;
+    --border: #e5e7eb;
+    --bg: #f9fafb;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; background: var(--bg); color: #111; font-size: 14px; }
+  h1 { font-size: 20px; font-weight: 700; }
+  h2 { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
 
+  /* Login */
+  #login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .login-card { background: #fff; border-radius: 12px; padding: 40px 32px; max-width: 380px; width: 100%; box-shadow: 0 4px 20px rgba(0,0,0,0.1); text-align: center; }
+  .login-card h1 { margin-bottom: 8px; color: var(--green); }
+  .login-card p { color: var(--gray); margin-bottom: 24px; font-size: 13px; }
+
+  /* App shell */
+  #app { display: none; }
+  .top-bar { background: var(--green); color: #fff; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; }
+  .top-bar h1 { font-size: 17px; }
+  .top-bar button { background: rgba(255,255,255,0.2); border: none; color: #fff; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+
+  /* Stats bar */
+  .stats-bar { display: flex; gap: 12px; padding: 16px 20px; overflow-x: auto; background: #fff; border-bottom: 1px solid var(--border); }
+  .stat-chip { background: var(--green-bg); border-radius: 10px; padding: 12px 18px; min-width: 110px; flex-shrink: 0; }
+  .stat-chip .num { font-size: 22px; font-weight: 700; color: var(--green); }
+  .stat-chip .lbl { font-size: 11px; color: var(--gray); margin-top: 2px; }
+
+  /* Main content */
+  .main { display: flex; gap: 0; min-height: calc(100vh - 120px); }
+  .sidebar { width: 220px; flex-shrink: 0; background: #fff; border-right: 1px solid var(--border); padding: 16px 12px; }
+  .sidebar button { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 12px; background: none; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; color: #333; text-align: left; transition: background 0.15s; }
+  .sidebar button:hover, .sidebar button.active { background: var(--green-bg); color: var(--green); font-weight: 600; }
+
+  /* Panels */
+  .panel { flex: 1; padding: 20px; overflow-y: auto; }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* Card */
+  .card { background: #fff; border-radius: 12px; padding: 20px; border: 1px solid var(--border); margin-bottom: 16px; }
+
+  /* Form elements */
+  label { display: block; font-size: 12px; font-weight: 600; color: var(--gray); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.3px; }
+  input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; outline: none; transition: border 0.15s;
+  }
+  input:focus { border-color: var(--green); }
+  .form-row { margin-bottom: 14px; }
+
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; transition: opacity 0.15s; }
+  .btn:hover { opacity: 0.85; }
+  .btn-green { background: var(--green); color: #fff; }
+  .btn-outline { background: #fff; color: var(--green); border: 1px solid var(--green); }
+  .btn-red { background: var(--red); color: #fff; }
+  .btn-sm { padding: 5px 10px; font-size: 12px; }
+
+  /* Toast */
+  #toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #111; color: #fff; padding: 10px 20px; border-radius: 8px; font-size: 13px; z-index: 9999; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+  #toast.show { opacity: 1; }
+
+  /* Table */
+  .tbl-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; padding: 8px 12px; font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: 0.3px; border-bottom: 1px solid var(--border); background: var(--bg); }
+  td { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+  tr:hover td { background: #fafafa; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+  .badge-green { background: #d1fae5; color: #065f46; }
+  .badge-amber { background: #fef3c7; color: #92400e; }
+  .badge-red { background: #fee2e2; color: #991b1b; }
+  .badge-gray { background: #f3f4f6; color: #4b5563; }
+
+  /* Chart bar */
+  .chart-wrap { display: flex; flex-direction: column; gap: 6px; }
+  .chart-row { display: flex; align-items: center; gap: 8px; }
+  .chart-label { width: 90px; font-size: 12px; color: var(--gray); text-align: right; flex-shrink: 0; }
+  .chart-bar-bg { flex: 1; background: #f3f4f6; border-radius: 4px; height: 18px; }
+  .chart-bar { height: 18px; background: var(--green); border-radius: 4px; min-width: 2px; transition: width 0.4s; }
+  .chart-val { font-size: 12px; color: #333; width: 24px; }
+
+  /* Token result box */
+  .token-result { background: #ecfdf5; border: 1px solid #6ee7b7; border-radius: 8px; padding: 16px; margin-top: 16px; display: none; }
+  .token-result .link { font-family: monospace; font-size: 12px; word-break: break-all; color: var(--green); margin-top: 6px; }
+  .copy-btn { background: var(--green); color: #fff; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; margin-top: 6px; }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .sidebar { display: none; }
+    .stats-bar { gap: 8px; }
+    .stat-chip { min-width: 90px; padding: 10px 12px; }
+    .stat-chip .num { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-card">
+    <div style="font-size:40px;margin-bottom:12px">🦁</div>
+    <h1>Admin Panel</h1>
+    <p>Island Guide by The SG Travel Buddy</p>
+    <div class="form-row">
+      <label>Password</label>
+      <input type="password" id="login-pass" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="btn btn-green" style="width:100%;justify-content:center" onclick="doLogin()">Sign in →</button>
+    <p id="login-err" style="color:var(--red);font-size:12px;margin-top:10px;display:none">Incorrect password</p>
+  </div>
+</div>
+
+<div id="app">
+  <div class="top-bar">
+    <h1>🦁 Island Guide Admin</h1>
+    <button onclick="doLogout()">Sign out</button>
+  </div>
+
+  <div class="stats-bar" id="stats-bar">
+    <div class="stat-chip"><div class="num" id="s-total">—</div><div class="lbl">Total sales</div></div>
+    <div class="stat-chip"><div class="num" id="s-active">—</div><div class="lbl">Active tokens</div></div>
+    <div class="stat-chip"><div class="num" id="s-free">—</div><div class="lbl">Free tokens</div></div>
+    <div class="stat-chip"><div class="num" id="s-revenue">—</div><div class="lbl">Revenue (USD)</div></div>
+    <div class="stat-chip"><div class="num" id="s-today">—</div><div class="lbl">Today</div></div>
+  </div>
+
+  <div class="main">
+    <div class="sidebar">
+      <button class="active" onclick="showSection('generate', this)">🎟️ Generate token</button>
+      <button onclick="showSection('tokens', this)">🔑 Active tokens</button>
+      <button onclick="showSection('stats', this)">📊 Stats & sales</button>
+      <button onclick="showSection('countries', this)">🌏 Countries</button>
+    </div>
+
+    <div class="panel">
+
+      <!-- Generate Token -->
+      <div class="section active" id="sec-generate">
+        <div class="card">
+          <h2>🎟️ Generate a free access token</h2>
+          <p style="color:var(--gray);font-size:13px;margin-bottom:16px">Issue a complimentary access link — it will be emailed directly to the recipient and valid for 21 days.</p>
+          <div class="form-row">
+            <label>Recipient email *</label>
+            <input type="email" id="gen-email" placeholder="traveller@example.com">
+          </div>
+          <div class="form-row">
+            <label>Recipient name (optional)</label>
+            <input type="text" id="gen-name" placeholder="e.g. Sarah">
+          </div>
+          <button class="btn btn-green" onclick="generateToken()">✨ Generate &amp; send magic link</button>
+          <div class="token-result" id="token-result">
+            <strong>✅ Token created &amp; email sent!</strong>
+            <div style="margin-top:8px;font-size:13px;color:#065f46">Magic link:</div>
+            <div class="link" id="token-link"></div>
+            <button class="copy-btn" onclick="copyLink()">Copy link</button>
+            <div style="font-size:12px;color:var(--gray);margin-top:8px" id="token-expiry"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Tokens -->
+      <div class="section" id="sec-tokens">
+        <div class="card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+            <h2 style="margin:0">🔑 Active tokens</h2>
+            <button class="btn btn-outline btn-sm" onclick="loadTokens()">↻ Refresh</button>
+          </div>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Expires</th>
+                <th>Uses</th>
+                <th>Country</th>
+                <th>Action</th>
+              </tr></thead>
+              <tbody id="tokens-tbody"><tr><td colspan="7" style="text-align:center;padding:30px;color:var(--gray)">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="section" id="sec-stats">
+        <div class="card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+            <h2 style="margin:0">📊 All sales &amp; purchases</h2>
+            <button class="btn btn-outline btn-sm" onclick="loadStats()">↻ Refresh</button>
+          </div>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr>
+                <th>Date &amp; time</th>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>Amount</th>
+                <th>Currency</th>
+                <th>Type</th>
+                <th>Stripe ID</th>
+              </tr></thead>
+              <tbody id="stats-tbody"><tr><td colspan="8" style="text-align:center;padding:30px;color:var(--gray)">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Countries -->
+      <div class="section" id="sec-countries">
+        <div class="card">
+          <h2>🌏 Sales by country</h2>
+          <div class="chart-wrap" id="country-chart" style="margin-top:8px">
+            <p style="color:var(--gray)">Loading...</p>
+          </div>
+        </div>
+        <div class="card">
+          <h2>🕐 Sales by hour (UTC)</h2>
+          <div class="chart-wrap" id="hour-chart" style="margin-top:8px">
+            <p style="color:var(--gray)">Loading...</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /panel -->
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<div id="toast"></div>
+
+<script>
+// ── IMPORTANT: Replace with your Cloudflare Worker URL
+var WORKER_URL = "https://island-guide-backend.the-sg-travel-buddy.workers.dev";
+var SITE_URL = "https://thesgtravelbuddy.github.io/islandguide";
+
+var adminPass = "";
+
+function doLogin() {
+  var pass = document.getElementById("login-pass").value;
+  if (!pass) return;
+  // Verify by attempting a real API call
+  fetch(WORKER_URL + "/admin/stats", {
+    headers: { "Authorization": "Basic " + btoa("admin:" + pass) }
+  }).then(function(r) {
+    if (r.ok) {
+      adminPass = pass;
+      document.getElementById("login-screen").style.display = "none";
+      document.getElementById("app").style.display = "block";
+      loadAll();
+    } else {
+      document.getElementById("login-err").style.display = "block";
+    }
+  }).catch(function() {
+    toast("Could not reach server — check Worker URL");
+  });
+}
+
+function doLogout() {
+  adminPass = "";
+  document.getElementById("login-screen").style.display = "flex";
+  document.getElementById("app").style.display = "none";
+  document.getElementById("login-pass").value = "";
+}
+
+function authHeaders() {
+  return { "Authorization": "Basic " + btoa("admin:" + adminPass), "Content-Type": "application/json" };
+}
+
+function showSection(name, btn) {
+  document.querySelectorAll(".section").forEach(function(el) { el.classList.remove("active"); });
+  document.getElementById("sec-" + name).classList.add("active");
+  document.querySelectorAll(".sidebar button").forEach(function(b) { b.classList.remove("active"); });
+  if (btn) btn.classList.add("active");
+  if (name === "tokens") loadTokens();
+  if (name === "stats") loadStats();
+  if (name === "countries") loadCountries();
+}
+
+function loadAll() {
+  loadStats(); // loads summary stats too
+}
+
+var statsCache = [];
+
+function loadStats() {
+  fetch(WORKER_URL + "/admin/stats", { headers: authHeaders() })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    statsCache = data;
+    updateSummaryStats(data);
+    renderStatsTable(data);
+  }).catch(function() { toast("Failed to load stats"); });
+}
+
+function updateSummaryStats(data) {
+  var now = Date.now();
+  var todayStart = new Date(); todayStart.setHours(0,0,0,0);
+  var total = data.length;
+  var free = data.filter(function(d) { return d.isFreeToken; }).length;
+  var paid = data.filter(function(d) { return !d.isFreeToken; });
+  var revenue = paid.reduce(function(s, d) { return s + (d.amount || 0); }, 0);
+  var today = data.filter(function(d) { return d.createdAt >= todayStart.getTime(); }).length;
+  document.getElementById("s-total").textContent = total;
+  document.getElementById("s-free").textContent = free;
+  document.getElementById("s-revenue").textContent = "$" + revenue.toFixed(2);
+  document.getElementById("s-today").textContent = today;
+}
+
+function loadTokens() {
+  fetch(WORKER_URL + "/admin/tokens", { headers: authHeaders() })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    document.getElementById("s-active").textContent = data.length;
+    var tbody = document.getElementById("tokens-tbody");
+    if (!data.length) {
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:30px;color:var(--gray)">No active tokens</td></tr>';
+      return;
+    }
+    tbody.innerHTML = data.map(function(t) {
+      var exp = new Date(t.expiresAt);
+      var expired = Date.now() > t.expiresAt;
+      var daysLeft = Math.ceil((t.expiresAt - Date.now()) / 86400000);
+      var expStr = expired ? "Expired" : daysLeft + "d left";
+      var expBadge = expired ? "badge-red" : daysLeft < 3 ? "badge-amber" : "badge-green";
+      return [
+        "<tr>",
+        "<td>" + esc(t.email) + "</td>",
+        "<td>" + esc(t.customerName || "—") + "</td>",
+        "<td><span class='badge " + (t.isFreeToken ? "badge-amber" : "badge-green") + "'>" + (t.isFreeToken ? "Free" : "Paid") + "</span></td>",
+        "<td><span class='badge " + expBadge + "'>" + expStr + "</span></td>",
+        "<td>" + (t.usageCount || 0) + "</td>",
+        "<td>" + esc(t.country || "—") + "</td>",
+        "<td><button class='btn btn-red btn-sm' onclick='revokeToken(\"" + esc(t.key.replace("token:","")) + "\", this)'>Revoke</button></td>",
+        "</tr>"
+      ].join("");
+    }).join("");
+  }).catch(function() { toast("Failed to load tokens"); });
+}
+
+function renderStatsTable(data) {
+  var tbody = document.getElementById("stats-tbody");
+  if (!data.length) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:30px;color:var(--gray)">No sales yet</td></tr>';
+    return;
+  }
+  tbody.innerHTML = data.map(function(d) {
+    var date = new Date(d.createdAt).toLocaleString("en-GB", { day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit" });
+    return [
+      "<tr>",
+      "<td style='white-space:nowrap'>" + date + "</td>",
+      "<td>" + esc(d.email) + "</td>",
+      "<td>" + esc(d.customerName || "—") + "</td>",
+      "<td>" + esc(d.country || "—") + "</td>",
+      "<td>" + (d.amount ? "$" + d.amount.toFixed(2) : "—") + "</td>",
+      "<td>" + esc(d.currency || "—") + "</td>",
+      "<td><span class='badge " + (d.isFreeToken ? "badge-amber" : "badge-green") + "'>" + (d.isFreeToken ? "Free" : "Paid") + "</span></td>",
+      "<td style='font-size:11px;color:var(--gray)'>" + esc((d.stripePaymentId || "—").slice(0,16)) + "</td>",
+      "</tr>"
+    ].join("");
+  }).join("");
+}
+
+function loadCountries() {
+  if (!statsCache.length) {
+    loadStats();
+    setTimeout(renderCharts, 1200);
+  } else {
+    renderCharts();
+  }
+}
+
+function renderCharts() {
+  // Country chart
+  var countryCounts = {};
+  statsCache.forEach(function(d) {
+    var c = d.country || "Unknown";
+    countryCounts[c] = (countryCounts[c] || 0) + 1;
+  });
+  var countries = Object.entries(countryCounts).sort(function(a,b) { return b[1]-a[1]; });
+  var maxC = countries.length ? countries[0][1] : 1;
+  document.getElementById("country-chart").innerHTML = countries.length ? countries.map(function(e) {
+    return [
+      "<div class='chart-row'>",
+      "<div class='chart-label'>" + esc(e[0]) + "</div>",
+      "<div class='chart-bar-bg'><div class='chart-bar' style='width:" + Math.round(e[1]/maxC*100) + "%'></div></div>",
+      "<div class='chart-val'>" + e[1] + "</div>",
+      "</div>"
+    ].join("");
+  }).join("") : "<p style='color:var(--gray)'>No data yet</p>";
+
+  // Hour chart
+  var hourCounts = {};
+  for (var h=0;h<24;h++) hourCounts[h]=0;
+  statsCache.forEach(function(d) {
+    var h = new Date(d.createdAt).getUTCHours();
+    hourCounts[h]++;
+  });
+  var maxH = Math.max.apply(null, Object.values(hourCounts)) || 1;
+  document.getElementById("hour-chart").innerHTML = Object.entries(hourCounts).map(function(e) {
+    var h = parseInt(e[0]);
+    var label = h.toString().padStart(2,"0") + ":00";
+    return [
+      "<div class='chart-row'>",
+      "<div class='chart-label'>" + label + "</div>",
+      "<div class='chart-bar-bg'><div class='chart-bar' style='width:" + Math.round(e[1]/maxH*100) + "%'></div></div>",
+      "<div class='chart-val'>" + e[1] + "</div>",
+      "</div>"
+    ].join("");
+  }).join("");
+}
+
+function generateToken() {
+  var email = document.getElementById("gen-email").value.trim();
+  var name = document.getElementById("gen-name").value.trim();
+  if (!email || !email.includes("@")) { toast("Please enter a valid email"); return; }
+  fetch(WORKER_URL + "/admin/generate", {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify({ email: email, name: name })
+  }).then(function(r) { return r.json(); })
+  .then(function(data) {
+    if (data.success) {
+      var link = SITE_URL + "/premium/?t=" + data.token;
+      document.getElementById("token-link").textContent = link;
+      document.getElementById("token-expiry").textContent = "Expires: " + data.expiryDate + " · Email sent: " + (data.emailSent ? "✅" : "⚠️ failed");
+      document.getElementById("token-result").style.display = "block";
+      window._lastLink = link;
+      toast("✅ Token created" + (data.emailSent ? " and emailed!" : " (email failed — copy link manually)"));
+    } else {
+      toast("Error: " + (data.error || "Unknown error"));
+    }
+  }).catch(function() { toast("Failed to generate token"); });
+}
+
+function copyLink() {
+  if (window._lastLink) {
+    navigator.clipboard.writeText(window._lastLink).then(function() { toast("Link copied!"); });
+  }
+}
+
+function revokeToken(token, btn) {
+  if (!confirm("Revoke this token? The user will lose access immediately.")) return;
+  fetch(WORKER_URL + "/admin/revoke", {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify({ token: token })
+  }).then(function(r) { return r.json(); })
+  .then(function(data) {
+    if (data.success) { toast("Token revoked"); loadTokens(); }
+    else toast("Failed to revoke");
+  });
+}
+
+function toast(msg) {
+  var t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(function() { t.classList.remove("show"); }, 3000);
+}
+
+function esc(str) {
+  if (!str) return "";
+  return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+</script>
+</body>
+</html>
