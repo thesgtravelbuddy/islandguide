@@ -118,15 +118,23 @@
     if (!email) return;
     var wm = document.createElement("div");
     wm.id = "ig-watermark";
+    // Build a tiled SVG watermark
+    var svgText = encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="340" height="160">' +
+      '<text x="170" y="80" font-family="Arial" font-size="12" fill="rgba(0,0,0,0.09)" ' +
+      'text-anchor="middle" dominant-baseline="middle" ' +
+      'transform="rotate(-25,170,80)">' +
+      'Licensed to ' + email +
+      '</text></svg>'
+    );
     wm.style.cssText = [
-      "position:fixed;top:50%;left:50%;",
-      "transform:translate(-50%,-50%) rotate(-25deg);",
+      "position:fixed;top:0;left:0;right:0;bottom:0;",
       "z-index:999999;pointer-events:none;",
-      "font-family:Arial,sans-serif;font-size:22px;",
-      "color:rgba(255,0,0,0.4);white-space:nowrap;",
+      "background-image:url("data:image/svg+xml," + svgText + "");",
+      "background-repeat:repeat;",
+      "background-size:340px 160px;",
       "user-select:none;-webkit-user-select:none;"
     ].join("");
-    wm.textContent = "Licensed to " + email;
     document.body.appendChild(wm);
   }
 
