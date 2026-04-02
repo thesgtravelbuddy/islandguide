@@ -105,7 +105,7 @@
     var email = sessionStorage.getItem("ig_email") || "";
     if (!email) return;
     var wm = document.createElement("div");
-    wm.style.cssText = "position:fixed;bottom:8px;right:10px;z-index:99998;font-family:Arial,sans-serif;font-size:10px;color:rgba(0,0,0,0.15);pointer-events:none;user-select:none;-webkit-user-select:none;letter-spacing:0.3px;";
+    wm.style.cssText = "position:fixed;top:60px;right:10px;z-index:99998;font-family:Arial,sans-serif;font-size:10px;color:rgba(0,0,0,0.18);pointer-events:none;user-select:none;-webkit-user-select:none;letter-spacing:0.3px;writing-mode:vertical-rl;text-orientation:mixed;";
     wm.textContent = "Licensed to " + email;
     document.body.appendChild(wm);
   }
