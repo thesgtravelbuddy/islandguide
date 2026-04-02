@@ -41,6 +41,10 @@
 
   var params = new URLSearchParams(window.location.search);
   var token = params.get("t") || sessionStorage.getItem("ig_token");
+  // Clear old sessions that don't have email cached yet
+  if (sessionStorage.getItem("ig_valid") === "1" && !sessionStorage.getItem("ig_email")) {
+    sessionStorage.removeItem("ig_valid");
+  }
 
   if (!token) {
     document.documentElement.style.visibility = "visible";
@@ -52,12 +56,20 @@
   var cached = sessionStorage.getItem("ig_valid");
   var cachedToken = sessionStorage.getItem("ig_token");
   if (cached === "1" && cachedToken === token) {
+    // If we don't have the email cached yet, fetch it now
+    if (!sessionStorage.getItem("ig_email")) {
+      fetch(WORKER_URL + "/validate?t=" + encodeURIComponent(token), { method: "GET" })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.email) sessionStorage.setItem("ig_email", data.email);
+      }).catch(function() {});
+    }
     document.addEventListener("DOMContentLoaded", function() {
       document.documentElement.style.visibility = "visible";
       document.documentElement.style.overflow = "";
       if (params.get("t")) history.replaceState(null, "", window.location.pathname);
       showWelcomeBanner();
-      showWatermark();
+      setTimeout(showWatermark, 500);
     });
     return;
   }
